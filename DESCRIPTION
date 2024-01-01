@@ -1,0 +1,22 @@
+Package: mltools
+Title: Mixed-layer Tools
+Version: 0.0.99
+Authors@R: person("Johannes", "Muelmenstaedt", email = "johannes.muelmenstaedt@pnnl.gov", role = c("aut", "cre"))
+Description: Analyze the mixed layer in GCM simulations
+Depends:
+    R (>= 3.5.0)
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    plyr,
+    dplyr,
+    doParallel,
+    doSNOW,
+    snow,
+    magrittr,
+    ncdf4
+RoxygenNote: 7.2.3
+Suggests: knitr
+VignetteBuilder: knitr
+NeedsCompilation: yes

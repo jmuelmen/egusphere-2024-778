@@ -1,0 +1,1 @@
+data/cori/EAMv1_entrain_NEP_nudged_pd_cdnc-lwp.cam.h1.2010.nc

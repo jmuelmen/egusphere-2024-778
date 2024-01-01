@@ -1,0 +1,6 @@
+RF_aci −1.10 −0.33	
+RA_aci_LWP 0.01 +0.56	
+RA_aci_cf −1.14 0.0	
+ERF_aci	−1.73 −0.27	
+ERF_aer	−2.19 −0.61	
+ERF_aer_obs_inf −1.60 −0.61

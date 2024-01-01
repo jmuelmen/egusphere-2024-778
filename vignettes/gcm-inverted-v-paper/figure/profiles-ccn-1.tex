@@ -1,0 +1,618 @@
+% Created by tikzDevice version 0.12.5 on 2023-12-28 06:10:44
+% !TEX encoding = UTF-8 Unicode
+\documentclass[acp, manuscript]{copernicus}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+
+
+
+%% Journal abbreviations (please use the same for preprints and final revised papers)
+
+
+% Advances in Geosciences (adgeo)
+% Advances in Radio Science (ars)
+% Advances in Science and Research (asr)
+% Advances in Statistical Climatology, Meteorology and Oceanography (ascmo)
+% Annales Geophysicae (angeo)
+% Archives Animal Breeding (aab)
+% Atmospheric Chemistry and Physics (acp)
+% Atmospheric Measurement Techniques (amt)
+% Biogeosciences (bg)
+% Climate of the Past (cp)
+% DEUQUA Special Publications (deuquasp)
+% Drinking Water Engineering and Science (dwes)
+% Earth Surface Dynamics (esurf)
+% Earth System Dynamics (esd)
+% Earth System Science Data (essd)
+% E&G Quaternary Science Journal (egqsj)
+% EGUsphere (egusphere) | This is only for EGUsphere preprints submitted without relation to an EGU journal.
+% European Journal of Mineralogy (ejm)
+% Fossil Record (fr)
+% Geochronology (gchron)
+% Geographica Helvetica (gh)
+% Geoscience Communication (gc)
+% Geoscientific Instrumentation, Methods and Data Systems (gi)
+% Geoscientific Model Development (gmd)
+% History of Geo- and Space Sciences (hgss)
+% Hydrology and Earth System Sciences (hess)
+% Journal of Bone and Joint Infection (jbji)
+% Journal of Micropalaeontology (jm)
+% Journal of Sensors and Sensor Systems (jsss)
+% Magnetic Resonance (mr)
+% Mechanical Sciences (ms)
+% Natural Hazards and Earth System Sciences (nhess)
+% Nonlinear Processes in Geophysics (npg)
+% Ocean Science (os)
+% Polarforschung - Journal of the German Society for Polar Research (polf)
+% Primate Biology (pb)
+% Proceedings of the International Association of Hydrological Sciences (piahs)
+% Safety of Nuclear Waste Disposal (sand)
+% Scientific Drilling (sd)
+% SOIL (soil)
+% Solid Earth (se)
+% The Cryosphere (tc)
+% Weather and Climate Dynamics (wcd)
+% Web Ecology (we)
+% Wind Energy Science (wes)
+
+
+%% \usepackage commands included in the copernicus.cls:
+%\usepackage[german, english]{babel}
+%\usepackage{tabularx}
+%\usepackage{cancel}
+%\usepackage{multirow}
+%\usepackage{supertabular}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{amsthm}
+%\usepackage{float}
+%\usepackage{subfig}
+%\usepackage{rotating}
+\usepackage{newtxmath}
+\usepackage{soul}
+
+\usepackage{todonotes}
+\newcommand{\jmu}{\ensuremath{j_\mu}}
+\newcommand{\jmcomment}[1]{\todo[inline, color=red!50]{\jmu: #1}}
+\newcommand{\egcomment}[1]{\todo[inline, color=brown!50]{\textbf{eg}: #1}}
+\newcommand{\yzcomment}[1]{\todo[inline, color=yellow!50]{\textbf{yz}: #1}}
+\newcommand{\jqcomment}[1]{\todo[inline, color=blue!50]{\textbf{jq}: #1}}
+\newcommand{\avcomment}[1]{\todo[inline, color=green!40]{\textbf{av}: #1}}
+\newcommand{\hwcomment}[1]{\todo[inline, color=brown!50]{\textbf{hw}: #1}}
+\newcommand{\dscomment}[1]{\todo[inline, color=purple!50]{\textbf{ds}: #1}}
+\newcommand{\mccomment}[1]{\todo[inline, color=orange!40]{\textbf{mc}: #1}}
+\newcommand{\agcomment}[1]{\todo[inline, color=cyan!40]{\textbf{AG}: #1}}
+\newcommand{\afcomment}[1]{\todo[inline, color=grey!40]{\textbf{af}: #1}}
+\newcommand{\pscomment}[1]{\todo[inline, color=orange!40]{\textbf{ps}: #1}}
+
+\newcommand{\omegaf}{\ensuremath{\omega_{500}}}
+\renewcommand\d[2]{\ensuremath{\frac{d#1}{d#2}}}
+\newcommand\dd[2]{\ensuremath{\frac{\partial#1}{\partial#2}}}
+\newcommand\D[2]{\ensuremath{\frac{D#1}{D#2}}}
+\newcommand\ddp[2]{\ensuremath{\partial#1/\partial#2}}
+\newcommand\DDP[2]{\ensuremath{D#1/D#2}}
+\newcommand\erfaci{ERF$_\text{aci}$}
+\newcommand\erfaer{ERF$_\text{aer}$}
+%% \newcommand\degree{\ensuremath{{}^\circ}}
+\newcommand\cor{\ensuremath{\text{cor}}}
+\newcommand\nd{\ensuremath{N_d}}
+\renewcommand\ni{\ensuremath{N_i}} %% replaces "not in" set operator
+\newcommand\cdnc{\nd}
+\newcommand\lwp{\ensuremath{\mathcal L}}
+\newcommand\iwp{\ensuremath{\mathcal I}}
+\newcommand\twp{\ensuremath{\mathcal L} + \ensuremath{\mathcal I}}
+\newcommand\fc{\ensuremath{f_c}}
+\newcommand\cf{\fc}
+\newcommand\re{\ensuremath{r_e}}
+
+\newcommand\ql{\ensuremath{q_l}}
+\newcommand\qi{\ensuremath{q_i}}
+\newcommand\phase{\ensuremath{\varphi}}
+
+\newcommand\swcre{\ensuremath{\mathcal{S}_c}}
+
+\newcommand\fboptics{\ensuremath{\lambda_\text{o}}}
+\newcommand\fblifetime{\ensuremath{\lambda_\ell}}
+\newcommand\fbphase{\ensuremath{\lambda_{\phase}}}
+\newcommand\fbtwp{\ensuremath{\lambda_{\twp}}}
+
+\newcommand\lon{\ensuremath{\lambda}}
+\newcommand\lat{\ensuremath{\phi}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (236.16,236.16);
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{255,255,255}
+\definecolor{fillColor}{RGB}{255,255,255}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round,line cap=round,fill=fillColor] (  0.00,  0.00) rectangle (236.16,236.16);
+\end{scope}
+\begin{scope}
+\path[clip] ( 43.64, 43.77) rectangle (230.16,230.16);
+\definecolor{fillColor}{RGB}{255,255,255}
+
+\path[fill=fillColor] ( 43.64, 43.77) rectangle (230.16,230.16);
+\definecolor{drawColor}{gray}{0.92}
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] ( 43.64,189.10) --
+	(230.16,189.10);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] ( 43.64,123.93) --
+	(230.16,123.93);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] ( 43.64, 58.76) --
+	(230.16, 58.76);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] ( 71.14, 43.77) --
+	( 71.14,230.16);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] (109.17, 43.77) --
+	(109.17,230.16);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] (147.21, 43.77) --
+	(147.21,230.16);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] (185.25, 43.77) --
+	(185.25,230.16);
+
+\path[draw=drawColor,line width= 0.3pt,line join=round] (223.28, 43.77) --
+	(223.28,230.16);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 43.64,221.69) --
+	(230.16,221.69);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 43.64,156.51) --
+	(230.16,156.51);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 43.64, 91.34) --
+	(230.16, 91.34);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 52.12, 43.77) --
+	( 52.12,230.16);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 90.15, 43.77) --
+	( 90.15,230.16);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (128.19, 43.77) --
+	(128.19,230.16);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (166.23, 43.77) --
+	(166.23,230.16);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (204.27, 43.77) --
+	(204.27,230.16);
+\definecolor{drawColor}{RGB}{213,62,79}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 80.85,286.86) --
+	( 82.55,280.34) --
+	( 84.58,273.82) --
+	( 87.17,267.31) --
+	( 90.54,260.79) --
+	( 93.91,254.27) --
+	( 98.75,247.75) --
+	(105.42,241.24) --
+	(112.18,234.72) --
+	(118.53,228.20) --
+	(124.29,221.69) --
+	(131.07,215.17) --
+	(142.20,208.65) --
+	(153.35,202.13) --
+	(156.34,195.62) --
+	(155.73,189.10) --
+	(154.90,182.58) --
+	(156.96,176.07) --
+	(167.21,169.55) --
+	(193.04,163.03) --
+	(207.85,156.51) --
+	(212.06,150.00) --
+	(212.72,143.48) --
+	(213.94,136.96) --
+	(215.35,130.45) --
+	(216.70,123.93) --
+	(217.85,117.41) --
+	(218.91,110.89) --
+	(220.05,104.38) --
+	(221.05, 97.86) --
+	(221.68, 91.34);
+\definecolor{drawColor}{RGB}{252,141,89}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 76.81,286.86) --
+	( 79.06,280.34) --
+	( 80.76,273.82) --
+	( 82.32,267.31) --
+	( 86.02,260.79) --
+	( 89.87,254.27) --
+	( 91.93,247.75) --
+	( 94.90,241.24) --
+	( 99.61,234.72) --
+	(106.83,228.20) --
+	(112.59,221.69) --
+	(117.12,215.17) --
+	(121.52,208.65) --
+	(125.83,202.13) --
+	(133.30,195.62) --
+	(139.28,189.10) --
+	(143.04,182.58) --
+	(144.21,176.07) --
+	(149.53,169.55) --
+	(160.16,163.03) --
+	(173.41,156.51) --
+	(176.63,150.00) --
+	(177.99,143.48) --
+	(178.20,136.96) --
+	(178.61,130.45) --
+	(179.83,123.93) --
+	(180.58,117.41) --
+	(181.48,110.89) --
+	(182.37,104.38) --
+	(183.27, 97.86) --
+	(184.08, 91.34) --
+	(184.59, 84.83);
+\definecolor{drawColor}{RGB}{254,224,139}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 73.70,286.86) --
+	( 75.57,280.34) --
+	( 77.52,273.82) --
+	( 79.78,267.31) --
+	( 83.10,260.79) --
+	( 86.46,254.27) --
+	( 89.30,247.75) --
+	( 92.12,241.24) --
+	( 95.89,234.72) --
+	(101.98,228.20) --
+	(108.00,221.69) --
+	(112.12,215.17) --
+	(114.83,208.65) --
+	(118.65,202.13) --
+	(122.05,195.62) --
+	(124.93,189.10) --
+	(126.90,182.58) --
+	(128.80,176.07) --
+	(131.57,169.55) --
+	(140.51,163.03) --
+	(150.49,156.51) --
+	(154.72,150.00) --
+	(155.91,143.48) --
+	(156.69,136.96) --
+	(157.24,130.45) --
+	(158.68,123.93) --
+	(159.97,117.41) --
+	(160.93,110.89) --
+	(161.89,104.38) --
+	(162.73, 97.86) --
+	(163.50, 91.34) --
+	(164.17, 84.83) --
+	(164.60, 78.31);
+\definecolor{drawColor}{RGB}{230,245,152}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 68.95,286.86) --
+	( 70.49,280.34) --
+	( 72.87,273.82) --
+	( 76.07,267.31) --
+	( 78.89,260.79) --
+	( 80.53,254.27) --
+	( 80.76,247.75) --
+	( 81.56,241.24) --
+	( 84.73,234.72) --
+	( 90.28,228.20) --
+	( 97.08,221.69) --
+	(103.96,215.17) --
+	(108.31,208.65) --
+	(111.78,202.13) --
+	(115.18,195.62) --
+	(119.44,189.10) --
+	(123.67,182.58) --
+	(125.22,176.07) --
+	(126.93,169.55) --
+	(133.15,163.03) --
+	(140.28,156.51) --
+	(142.88,150.00) --
+	(143.59,143.48) --
+	(144.58,136.96) --
+	(145.77,130.45) --
+	(146.89,123.93) --
+	(147.99,117.41) --
+	(149.07,110.89) --
+	(150.15,104.38) --
+	(151.12, 97.86) --
+	(151.89, 91.34) --
+	(152.56, 84.83) --
+	(153.13, 78.31) --
+	(153.49, 71.79);
+\definecolor{drawColor}{RGB}{153,213,148}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 70.57,286.86) --
+	( 70.73,280.34) --
+	( 71.18,273.82) --
+	( 72.50,267.31) --
+	( 75.13,260.79) --
+	( 77.19,254.27) --
+	( 79.82,247.75) --
+	( 82.34,241.24) --
+	( 84.93,234.72) --
+	( 88.21,228.20) --
+	( 91.47,221.69) --
+	( 96.85,215.17) --
+	(103.12,208.65) --
+	(108.73,202.13) --
+	(112.30,195.62) --
+	(112.45,189.10) --
+	(111.94,182.58) --
+	(113.65,176.07) --
+	(116.17,169.55) --
+	(125.11,163.03) --
+	(133.89,156.51) --
+	(138.48,150.00) --
+	(140.12,143.48) --
+	(141.40,136.96) --
+	(142.76,130.45) --
+	(143.96,123.93) --
+	(145.01,117.41) --
+	(146.28,110.89) --
+	(147.27,104.38) --
+	(148.22, 97.86) --
+	(149.06, 91.34) --
+	(149.84, 84.83) --
+	(150.56, 78.31) --
+	(151.16, 71.79) --
+	(151.54, 65.27);
+\definecolor{drawColor}{RGB}{50,136,189}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 73.47,286.86) --
+	( 74.03,280.34) --
+	( 74.55,273.82) --
+	( 75.28,267.31) --
+	( 76.50,260.79) --
+	( 78.19,254.27) --
+	( 80.01,247.75) --
+	( 82.23,241.24) --
+	( 83.59,234.72) --
+	( 85.02,228.20) --
+	( 89.04,221.69) --
+	( 94.07,215.17) --
+	( 99.16,208.65) --
+	(103.49,202.13) --
+	(106.49,195.62) --
+	(110.03,189.10) --
+	(113.53,182.58) --
+	(115.65,176.07) --
+	(116.64,169.55) --
+	(120.55,163.03) --
+	(130.00,156.51) --
+	(132.19,150.00) --
+	(132.61,143.48) --
+	(133.81,136.96) --
+	(135.08,130.45) --
+	(136.12,123.93) --
+	(136.87,117.41) --
+	(137.77,110.89) --
+	(138.64,104.38) --
+	(139.57, 97.86) --
+	(140.33, 91.34) --
+	(141.02, 84.83) --
+	(141.71, 78.31) --
+	(142.36, 71.79) --
+	(142.87, 65.27) --
+	(143.19, 58.76);
+\definecolor{drawColor}{RGB}{190,190,190}
+
+\path[draw=drawColor,line width= 0.6pt,dash pattern=on 4pt off 4pt ,line join=round] ( 52.12, 43.77) -- ( 52.12,230.16);
+
+\path[draw=drawColor,line width= 0.6pt,dash pattern=on 4pt off 4pt ,line join=round] ( 43.64,156.51) -- (230.16,156.51);
+\definecolor{drawColor}{gray}{0.20}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round,line cap=round] ( 43.64, 43.77) rectangle (230.16,230.16);
+\end{scope}
+\begin{scope}
+\path[clip] ( 43.64, 12.00) rectangle (230.16, 28.43);
+\definecolor{drawColor}{gray}{0.10}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.88] at (136.90, 17.35) {CCN ($S=0.2\%$, cm$^{-3}$)};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{gray}{0.20}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 52.12, 41.02) --
+	( 52.12, 43.77);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 90.15, 41.02) --
+	( 90.15, 43.77);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (128.19, 41.02) --
+	(128.19, 43.77);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (166.23, 41.02) --
+	(166.23, 43.77);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (204.27, 41.02) --
+	(204.27, 43.77);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{gray}{0.30}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.88] at ( 52.12, 33.09) {0};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.88] at (128.19, 33.09) {100};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.88] at (204.27, 33.09) {200};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{gray}{0.30}
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.88] at ( 38.69,218.82) {$-$10};
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.88] at ( 38.69,153.65) {0};
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.88] at ( 38.69, 88.48) {10};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{gray}{0.20}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 40.89,221.69) --
+	( 43.64,221.69);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 40.89,156.51) --
+	( 43.64,156.51);
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 40.89, 91.34) --
+	( 43.64, 91.34);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at ( 19.16,136.96) {$k - k_\text{pbl}$};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 48.37, 66.94) rectangle (141.49,113.79);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.80] at ( 53.87,102.22) {PBL depth (model levels)};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 53.87, 91.71) rectangle ( 63.51,101.35);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{213,62,79}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 54.84, 96.53) -- ( 62.54, 96.53);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 53.87, 82.08) rectangle ( 63.51, 91.71);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{252,141,89}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 54.84, 86.90) -- ( 62.54, 86.90);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 53.87, 72.44) rectangle ( 63.51, 82.08);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{254,224,139}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 54.84, 77.26) -- ( 62.54, 77.26);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 78.51, 91.71) rectangle ( 88.14,101.35);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{230,245,152}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 79.47, 96.53) -- ( 87.18, 96.53);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 78.51, 82.08) rectangle ( 88.14, 91.71);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{153,213,148}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 79.47, 86.90) -- ( 87.18, 86.90);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+
+\path[] ( 78.51, 72.44) rectangle ( 88.14, 82.08);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{50,136,189}
+
+\path[draw=drawColor,line width= 1.1pt,line join=round] ( 79.47, 77.26) -- ( 87.18, 77.26);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at ( 67.51, 94.25) {10};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at ( 67.51, 84.62) {11};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at ( 67.51, 74.98) {12};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at ( 92.14, 94.25) {13};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at ( 92.14, 84.62) {14};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (236.16,236.16);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at ( 92.14, 74.98) {15};
+\end{scope}
+\end{tikzpicture}
+
+\end{document}
