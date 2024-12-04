@@ -4,10 +4,14 @@
 \alias{calculate_h}
 \title{Calculate PBL top height}
 \usage{
-calculate_h(df, debug.theta = FALSE, debug.q = FALSE)
+calculate_h(df, lev.type = "full", debug.theta = FALSE, debug.q = FALSE)
 }
 \arguments{
 \item{df}{data_frame grouped by all coordinate variables except lev}
+
+\item{lev.type}{return level mid-point or level interface
+(approximated as mean between inversion level and next-higher
+level)}
 }
 \description{
 Calculate PBL top height

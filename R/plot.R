@@ -1,3 +1,4 @@
+#' @export
 plot.sample.era5 <- function() {
     library(plyr)
     library(dplyr)
@@ -61,6 +62,7 @@ plot.sample.era5 <- function() {
 
 }
 
+#' @export
 plot.sample <- function() {
     library(plyr)
     library(dplyr)
@@ -366,6 +368,7 @@ plot.sample <- function() {
     rm(omega)
 }
 
+#' @export
 plot.sample2 <- function() {
     library(plyr)
     library(dplyr)

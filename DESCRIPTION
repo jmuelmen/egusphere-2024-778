@@ -1,6 +1,6 @@
 Package: mltools
 Title: Mixed-layer Tools
-Version: 0.0.99
+Version: 0.2.3
 Authors@R: person("Johannes", "Muelmenstaedt", email = "johannes.muelmenstaedt@pnnl.gov", role = c("aut", "cre"))
 Description: Analyze the mixed layer in GCM simulations
 Depends:

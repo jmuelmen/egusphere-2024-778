@@ -40,9 +40,10 @@ load_scm <- function(fname) {
 #' @export
 #' 
 load_scm_giss <- function(fname) {
+    prsurf <- 1017.8 ## assumed value if not found in file
     nc <- ncdf4::nc_open(fname)
     df.3d <- plotutils::nc.to.df(nc, grep("^(p_3d|t|th|q|qcl|dth_rad|omega|z|nclic|cf|ccn0p2)$", names(nc$var), value = TRUE))
-    df.2d <- plotutils::nc.to.df(nc, c("shflx", "lhflx", "prec", "prsurf", "lwp", "cLWPss", "cldss_2d", "ssct_ncl")) %>%
+    df.2d <- plotutils::nc.to.df(nc, grep("^(shflx|lhflx|prec|prsurf|lwp|cLWPss|cLWPmc|pLWPmc|cldss_2d|ssct_ncl)$", names(nc$var), value = TRUE)) %>%
         dplyr::mutate(qflx = lhflx / Lv)
     df.3d %<>% dplyr::left_join(df.2d, by = c("time", "lon", "lat")) %>%
         dplyr::mutate(time = time / 24) %>%
@@ -61,12 +62,12 @@ load_scm_giss <- function(fname) {
 
 #' @export
 #' 
-scm_budget <- function(df.3d, inv.type = "jk.tinv") {
+scm_budget <- function(df.3d, inv.type = "jk.tinv", gradient.type = "p", lev.type = "half") {
     df.budget <- df.3d %>%
         calculate_thermodynamics() %>%
         group_by(time) %>%
-        find_inversion(inv.type) %>%
-        calculate_h() %>%
+        find_inversion(inv.type, gradient.type) %>%
+        calculate_h(lev.type) %>%
         group_by(lev) %>%
         calculate_tendencies() %>%
         mutate(dh.dt_lagged = (h - lag(h)) / dt) %>%

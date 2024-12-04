@@ -87,6 +87,22 @@ rename_fields_giss <- function(df) {
                       lwp = lwp * 1e-3)
 }
 
+#' Rename variables
+#'
+#' @export
+rename_fields_dharma <- function(df) {
+    df %>%
+        dplyr::rename(h = zi,
+                      cloud = cc,
+                      cdnc_ic = Nc,
+                      lwp = LWP,
+                      prec = prec_sfc) %>%
+        dplyr::mutate(prec = prec / 86400,
+                      lwp_ic = lwp / cloud,
+                      cdnc_ic = cdnc_ic * 1e6,
+                      lwp_ic = lwp_ic * 1e-3)
+}
+
 #' Calculate thermodynamics (theta, theta_l, qt)
 #'
 #' @param df data.frame containing p, p0, t (temperature), qv, ql
@@ -107,11 +123,15 @@ calculate_thermodynamics <- function(df) {
 #'     jk.pbl; "factor" returns all, with inv.type indicating the inversion type
 #' 
 #' @export
-find_inversion <- function(df, default.type = "jk.tinv") {
+find_inversion <- function(df, default.type = "jk.tinv", gradient.type = "p") {
     df %<>%
         dplyr::mutate(jk.tinv = max(which(diff(t) < 0)) + 1,
-                      jk.theta = length(lev[lev < 700]) + which.min(diff(theta[lev >= 700]) / diff(lev[lev >= 700])) + 1, ## theta jump is negative in increasing lev direction
-                      jk.qt = which.max(diff(qt) / diff(lev)) + 1, ## qt jump is positive in increasing lev direction
+                      jk.theta = length(lev[lev < 700]) +
+                          which.min(diff(theta[lev >= 700]) /
+                                    diff((if (gradient.type == "p") lev else z3)[lev >= 700])) + 1, ## theta jump is negative in increasing lev direction
+                      jk.qt = length(lev[lev < 700]) +
+                          which.max(diff(qt[lev >= 700]) /
+                                    diff((if (gradient.type == "p") lev else z3)[lev >= 700])) + 1, ## qt jump is positive in increasing lev direction
                       theta.jump = diff(theta)[jk.theta],
                       qt.jump = diff(qt)[jk.qt])
 
@@ -297,13 +317,19 @@ reconstruct_inversion_pressure <- function(p, z3, x, debug.plot = FALSE) {
 #' Calculate PBL top height
 #'
 #' @param df data_frame grouped by all coordinate variables except lev
+#' @param lev.type return level mid-point or level interface
+#'     (approximated as mean between inversion level and next-higher
+#'     level)
 #' 
 #' @export
-calculate_h <- function(df, debug.theta = FALSE, debug.q = FALSE) {
+calculate_h <- function(df, lev.type = "full",
+                        debug.theta = FALSE, debug.q = FALSE) {
     df %>%
         dplyr::mutate(
                    ## h on the vertical grid
-                   h = z3[jk == jk.pbl],
+                   h = ifelse(lev.type == "full",
+                              z3[jk == jk.pbl],
+                              0.5 * (z3[jk == jk.pbl] + z3[jk == jk.pbl - 1])),
                    ## subgrid h calculated from the theta_l profile
                    h_theta = reconstruct_inversion(p, z3, theta_l, debug.theta),
                    ## subgrid h calculated from the qt profile
@@ -382,6 +408,70 @@ filter_sc <- function(df) {
 #' 
 #' @export
 calculate_budgets <- function(df) {
+    df %>%
+        summarize(dt = dt[1],
+                  jk.pbl = jk.pbl[1],
+                  omega500 = if (exists('omega500', where=.)) omega500[1] else NA,
+                  omega700 = if (exists('omega700', where=.)) omega700[1] else NA,
+                  lts = if (exists('lts', where=.)) lts[1] else NA,
+                  cdnc = if (exists('cdnc', where=.)) cdnc[1] else NA,
+                  cdnc_ic = if (exists('cdnc_ic', where=.)) cdnc_ic[1] else NA,
+                  lwp = if (exists('lwp', where=.)) lwp[1] else NA,
+                  lwp_ic = if (exists('lwp_ic', where=.)) lwp_ic[1] else NA,
+                  lcc = if (exists('lcc', where=.)) lcc[1] else NA,
+                  precc = precc[1],
+                  precl = precl[1],
+                  p.pbl = p[jk == jk.pbl],
+                  omega.pbl = omega[jk == jk.pbl],
+                  h = h[1],
+                  dh.dt = dh.dt[1],
+                  dh.dt_lagged = if (exists("dh.dt_lagged", .)) dh.dt_lagged[1] else NA,
+                  ## calculate thermodynamics at the base of the FT
+                  theta_l.plus = theta_l[jk == jk.pbl - 1],
+                  q_t.plus = qt[jk == jk.pbl - 1],
+                  ## calculate density at the top of the PBL
+                  rho.minus = p[jk == jk.pbl] / (Rd * t[jk == jk.pbl]),
+                  dthetacore.minus = dthetacore[jk == jk.pbl],
+                  dqcore.minus = dqcore[jk == jk.pbl],
+                  dp.minus = dp[jk == jk.pbl],
+                  numliq.minus = numliq[jk == jk.pbl],
+                  f.minus = cloud[jk == jk.pbl],
+                  ## calculate PBL averages
+                  rhoH = sum((jk >= jk.pbl) * dp / 9.8, na.rm = TRUE),  ## FIXME: why does this expression give different results? (p.sfc - p.pbl) / 9.8,
+                  rhoH.dtheta_l.0.dt = sum((jk >= jk.pbl) * dp / 9.8 * dtheta_l.dt, na.rm = TRUE),
+                  rhoH.dthetacore.0 = sum((jk >= jk.pbl) * dp / 9.8 * dthetacore, na.rm = TRUE),
+                  rhoH.dq_t.0.dt = sum((jk >= jk.pbl) * dp / 9.8 * dq_t.dt, na.rm = TRUE),
+                  rhoH.dq_l.0.dt = sum((jk >= jk.pbl) * dp / 9.8 * dq_l.dt, na.rm = TRUE),
+                  rhoH.dqcore.0 = sum((jk >= jk.pbl) * dp / 9.8 * dqcore, na.rm = TRUE),
+                  theta_l.0 = sum((jk >= jk.pbl) * dp / 9.8 * theta_l, na.rm = TRUE) / rhoH,
+                  q_t.0 = sum((jk >= jk.pbl) * dp / 9.8 * qt, na.rm = TRUE) / rhoH,
+                  q_l.0 = sum((jk >= jk.pbl) * dp / 9.8 * ql, na.rm = TRUE) / rhoH,
+                  rho.0 = sum((jk >= jk.pbl) * dp / 9.8 * p / (Rd * t), na.rm = TRUE) / rhoH,
+                  ccn4.0 = sum((jk >= jk.pbl) * dp / 9.8 * ccn4 * Rd * t / p, na.rm = TRUE) / rhoH,
+                  delta.F.cp = -sum((jk >= jk.pbl) * dp / 9.8 * dthetarad, na.rm = TRUE),  ## $\Delta F$ is radiative *cooling* in our weird sign convention
+                  sh.cp = shflx[1] / cp,
+                  delta.R = prec[1], ## sum((jk >= jk.pbl) * dp / 9.8 * (prao + prco), na.rm = TRUE), ## nonnegative-definite, i.e., must be tendencies of precip, not cloud water
+                  delta.R.L.cp = delta.R * Lv / cp,
+                  qflx = qflx[1],
+                  ## solve budget equations for the entrainment terms
+                  delta.theta = theta_l.plus - theta_l.0,
+                  delta.q = q_t.plus - q_t.0,
+                  ## without advection, otherwise following Kalmus et al. eq. (10)--(11)
+                  E_theta.delta.theta.noadv = rhoH.dtheta_l.0.dt + delta.F.cp - sh.cp - delta.R.L.cp,
+                  E_q.delta.q.noadv = rhoH.dq_t.0.dt - qflx + delta.R,
+                  E_theta.noadv = E_theta.delta.theta.noadv / delta.theta,
+                  E_q.noadv = E_q.delta.q.noadv / delta.q,
+                  ## with total advection (vertical + horizontal) calculated by dycore, instead of horizontal advection + squishing term
+                  ## (note dthetacore and dqcore are of opposite sign to the advective terms)
+                  E_theta.delta.theta = E_theta.delta.theta.noadv - rhoH.dthetacore.0,
+                  E_q.delta.q = E_q.delta.q.noadv - rhoH.dqcore.0,
+                  E_theta = E_theta.delta.theta / delta.theta,
+                  E_q = E_q.delta.q / delta.q,
+                  ## estimates of PBL height/pressure tendencies from inversion layer reconstruction
+                  E_h_theta = rho.minus * dh_theta.dt[1] + omega.pbl / 9.8,
+                  E_h_q = rho.minus * dh_q.dt[1] + omega.pbl / 9.8,
+                  E_p_theta = (dp.pbl_theta.dt[1] + omega.pbl) / 9.8,
+                  E_p_q = (dp.pbl_q.dt[1] + omega.pbl) / 9.8)
 }
 
 #' Convert from budget units to energy fluxes

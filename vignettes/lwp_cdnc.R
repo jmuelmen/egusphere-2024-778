@@ -416,7 +416,11 @@ df.scu.e3sm %>%
     mutate(xtype = revalue(xtype, tikz_replacements_unitful())) %>%
     mutate(jk.pbl = 72 - jk.pbl) %>% ## cut(72 - jk.pbl, c(0,5,10,20,30,40,80), right = FALSE)) %>%
     filter(jk.pbl %in% 10:15) %>%
-    group_by(xtype, delta.k, jk.pbl) %>%
+    left_join(df.pblh.stats.v1 %>%
+              mutate(across(where(is.double), round)),
+              by = c("jk.pbl")) %>%
+    mutate(pblh = sprintf("%d ($%d\\pm%d$ m)", jk.pbl, mean, sd)) %>%
+    group_by(xtype, delta.k, pblh) %>%
     ## ## summarize(q25 = quantile(x, 0.25), q50 = quantile(x, 0.5), q75 = quantile(x, 0.75)) %>%
     summarize(q50 = mean(delta.x, na.rm = TRUE), q25 = mean(delta.x) - 2 * sd(delta.x), q75 = mean(delta.x) + 2 * sd(delta.x), n = n()) %>%
     ungroup() %>%
@@ -430,8 +434,8 @@ df.scu.e3sm %>%
         ## x = p.norm,
         ## x = delta.p * 1e-2,
         ## col = p.pbl,
-        col = factor(jk.pbl), 
-        fill = factor(jk.pbl))) +
+        col = pblh,
+        fill = pblh)) +
     ## scale_color_distiller(palette = "Spectral") +
     scale_y_continuous(labels = tikz_sanitize_sparse ) +
     ## scale_color_discrete("$k_\\text{sfc} - k_\\text{pbl}$"## , palette = "Spectral"
@@ -453,7 +457,7 @@ df.scu.e3sm %>%
     geom_vline(xintercept = 0, lty = "dashed", col = "grey") +
     theme(axis.title.x = element_blank(),
           strip.placement = "outside", strip.background = element_blank()) +
-    theme(legend.position = c(0.275, 0.25), legend.background = element_rect(fill = NA),
+    theme(legend.position = c(0.475, 0.125), legend.background = element_rect(fill = NA),
           legend.spacing.y = unit(0, "lines")) +
     theme(legend.text = element_text(size = 7),
           legend.title = element_text(size = 8),
@@ -519,6 +523,13 @@ ggplot(df.cosp.nep,
 
 ## @knitr e3sm-precip-setup
 df.e3sm.precip.bins <- df.e3sm.precip %>%
+    left_join(readRDS("../data/perlmutter/entrain_F2010A_run-EAMv1_nudged_2010_fscu.rds") %>%
+              left_join(readRDS("../ne30pg2.rds") %>%
+                        rename_with(tolower)) %>%
+              filter(landfrac == 0) %>%
+              group_by(lat, lon) %>%
+              summarize(fscu.annual = fscu.annual[1]) %>%
+              ungroup()) %>%
     filter_sc() %>%
     filter(precc == 0) %>%
     mutate(precip = 1e3 * 86400 * (precc + precl)) %>% ## m s^-1 --> mm d^-1
@@ -528,6 +539,188 @@ df.e3sm.precip.bins <- df.e3sm.precip %>%
                              levels = c("$R < 10^{-2}$~mm~d$^{-1}$",
                                         "$R\\geq 10^{-2}$~mm~d$^{-1}$"))) %>%
     discretize(precip, 6, equal_contents = TRUE, as_factor = TRUE) 
+
+## @knitr precip-lwp-cdnc
+  ggplot.precip.bins <- df.e3sm.precip.bins %>%
+      mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip))))) %>%
+      group_by(precip) %>%
+      lwp.cdnc.conditional(cdnc.bins =  exp(seq(log(3e6), log(3e8), length.out = 20))) %>%
+      replace_with_conventional_units() %>%
+      lwp.cdnc.plot(marginal = TRUE,
+                    col = precip, lty = "Mediated by $R$",
+                    expand = FALSE, cdnc.density.limits = c(0, 0.25))
+
+  ggplot.precip.bins[[3]] <- ggplot.precip.bins[[3]] +
+      geom_point(aes(col = precip),
+                 data = df.e3sm.precip.bins %>%
+                     group_by(precip) %>%
+                     summarize(cdnc_ic = exp(mean(log(cdnc_ic), na.rm = TRUE)),
+                               lwp_ic = exp(mean(log(lwp_ic), na.rm = TRUE))) %>%
+                     replace_with_conventional_units() %>%
+                     ungroup() %>%
+                     mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip)))))) +
+      geom_line(aes(lty = "Mediated by $R$"), col = "black",
+                data = df.e3sm.precip.bins %>%
+                    group_by(precip) %>%
+                    summarize(cdnc_ic = exp(mean(log(cdnc_ic), na.rm = TRUE)),
+                              lwp_ic = exp(mean(log(lwp_ic), na.rm = TRUE))) %>%
+                    replace_with_conventional_units() %>%
+                    ungroup() %>%
+                    mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip)))))) +
+      geom_line(aes(lty = "Model native relationship"),
+                col = "black",
+                data = df.e3sm.precip.bins %>%
+                    discretize_cdnc(bins =  exp(seq(log(3e6), log(3e8), length.out = 20))) %>%
+                    mutate(period = "PD") %>%
+                    group_by(period) %>%
+                    summarize_lwp() %>%
+                    replace_with_conventional_units() %>%
+                    ungroup()) +
+      labs_nd_lwp_conventional() +
+      theme(plot.margin = margin(0,0,6,0)) +
+      theme(legend.position = c(0.45, 0.8), legend.background = element_rect(fill = NA),
+             legend.spacing.y = unit(0, "lines"),
+             legend.margin = margin(7, unit = "lines"),
+             legend.direction = "vertical", legend.box = "vertical")
+
+  ggplot.precip.bins[[1]] <- ggplot.precip.bins[[1]] + theme(plot.margin = margin(6,0,0,0))
+  ggplot.precip.bins[[2]] <- ggplot.precip.bins[[2]] + theme(plot.margin = margin(0,0,0,0))
+  ggplot.precip.bins[[4]] <- ggplot.precip.bins[[4]] + theme(plot.margin = margin(0,6,0,0))
+  
+  ggplot.precip.bins &
+      scale_color_brewer("$R$~(mm~d$^{-1}$)", palette = "BrBG", guide = guide_legend(order = 2, ncol = 2)) &
+      scale_linetype_discrete("", guide = guide_legend(order = 1)) &
+      theme(legend.text = element_text(size = 7),
+            legend.title = element_text(size = 8),
+            legend.key.size = unit(0.8, "lines"))
+  
+  ## cowplot::plot_grid(
+  ##              df.e3sm.precip.bins %>%
+  ##              ## filter(exp == "c1 = 2.4") %>%
+  ##              ## discretize_cdnc(bins =  exp(seq(log(1e6), log(3e8), length.out = 20))) %>%
+  ##              ## ungroup() %>%
+  ##              mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip))))) %>%
+  ##              arrange(precip, cdnc_ic) %>%
+  ##              ggplot(aes(cdnc_ic, color = precip)) +
+  ##              geom_density() +
+  ##              ## geom_bar() +
+  ##              scale_x_log10() +
+  ##              ## facet_grid(. ~ precip) +
+  ##              labs(x = "$\\nd$ (in cloud, m$^{-3}$)", ) +
+  ##              theme_void() +
+  ##              theme(legend.position = "none") +
+  ##              theme(
+  ##                  strip.background = element_blank(),
+  ##                  strip.text.x = element_blank()
+  ##              ) +
+  ##              coord_cartesian(xlim = c(5e6, 2.5e8), expand = TRUE),
+  ##              df.e3sm.precip.bins %>%
+  ##                    ## filter(exp == "c1 = 2.4") %>%
+  ##     ## discretize(cdnc_ic, 30, equal_contents = TRUE) %>%
+  ##     discretize_cdnc(bins =  exp(seq(log(3e6), log(3e8), length.out = 20))) %>%
+  ##     group_by(precip) %>%
+  ##     summarize_lwp() %>%
+  ##     ungroup() %>%
+  ##     mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip))))) %>%
+  ##     arrange(precip, cdnc_ic) %>%
+  ##     ggplot(aes(cdnc_ic, lwp_ic)) +
+  ##     geom_line(aes(lty = "Mediated by $R$", col = precip)) +
+  ##     geom_point(aes(col = precip),
+  ##                data = df.e3sm.precip.bins %>%
+  ##                    group_by(precip) %>%
+  ##                    summarize(cdnc_ic = exp(mean(log(cdnc_ic), na.rm = TRUE)),
+  ##                              lwp_ic = exp(mean(log(lwp_ic), na.rm = TRUE))) %>%
+  ##                    ungroup() %>%
+  ##                    mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip)))))) +
+  ##     geom_line(aes(lty = "Mediated by $R$"),
+  ##               data = df.e3sm.precip.bins %>%
+  ##                    group_by(precip) %>%
+  ##                    summarize(cdnc_ic = exp(mean(log(cdnc_ic), na.rm = TRUE)),
+  ##                              lwp_ic = exp(mean(log(lwp_ic), na.rm = TRUE))) %>%
+  ##                    ungroup() %>%
+  ##                    mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip)))))) +
+  ##     geom_line(aes(lty = "Model native relationship"),
+  ##               data = df.e3sm.precip.bins %>%
+  ##                   discretize_cdnc(bins =  exp(seq(log(3e6), log(3e8), length.out = 20))) %>%
+  ##                   mutate(period = "PD") %>%
+  ##                   group_by(period) %>%
+  ##                   summarize_lwp() %>%
+  ##                   ungroup()) +
+  ##     scale_x_log10() +
+  ##     scale_y_log10() +
+  ##     scale_color_discrete("$R$~(mm~d$^{-1}$)", guide = guide_legend(order = 2, ncol = 1)) +
+  ##     scale_linetype_discrete("", guide = guide_legend(order = 1)) +
+  ##     ## facet_grid(. ~ precip) +
+  ##     labs(x = "$\\nd$ (in cloud, m$^{-3}$)",
+  ##          y = "$\\mathcal{L}$ (in cloud, kg~m$^{-2}$)") +
+  ##     theme(plot.margin = margin(0,0,12,12)) +
+  ##     theme(legend.position = c(0.225, 0.65), legend.background = element_rect(fill = NA),
+  ##            legend.spacing.y = unit(0, "lines"),
+  ##            legend.margin = margin(6, unit = "lines"),
+  ##            legend.direction = "vertical", legend.box = "vertical"
+  ##      ) +
+  ##     coord_cartesian(xlim = c(5e6, 2.5e8), expand = FALSE)
+  ##  , ## ) / (
+  ##  nrow = 2, axis = "lr", align = "v", rel_heights = c(0.1, 1)
+  ## )  
+
+## @knitr precip-lwp-cdnc-fscu
+ggplot.precip.fscu.bins <- df.e3sm.precip.bins %>%
+    mutate(precip = factor(precip, labels = (sprintf("%s", levels(precip))))) %>%
+    discretize(fscu.annual, seq(0, 1, by = 0.1), as_factor = TRUE) %>%
+    group_by(precip, fscu.annual) %>%
+    lwp.cdnc.conditional(cdnc.bins =  exp(seq(log(3e6), log(3e8), length.out = 20))) %>%
+    replace_with_conventional_units() %>%
+    lwp.cdnc.plot(marginal = FALSE,
+                  col = precip, lty = "Mediated by $R$",
+                  expand = FALSE, cdnc.density.limits = c(0, 0.25)) +
+    labs_nd_lwp_conventional() +
+    facet_wrap(~ fscu.annual, ncol = 3) +
+    theme(plot.margin = margin(0,0,6,0)) +
+    theme(legend.position = c(0.45, 0.8), legend.background = element_rect(fill = NA),
+          legend.spacing.y = unit(0, "lines"),
+          legend.margin = margin(7, unit = "lines"),
+          legend.direction = "vertical", legend.box = "vertical")
+
+ggplot.precip.fscu.bins &
+    scale_color_brewer("$R$~(mm~d$^{-1}$)", palette = "BrBG", guide = guide_legend(order = 2, ncol = 2)) &
+    scale_linetype_discrete("", guide = guide_legend(order = 1)) &
+    theme(legend.text = element_text(size = 7),
+          legend.title = element_text(size = 8),
+          legend.key.size = unit(0.8, "lines"))
+
+
+## @knitr e3sm-precip-multilin
+lm.e3sm.precip <- df.e3sm.precip %>%
+    filter_sc() %>%
+    filter(precc == 0) %>%
+    mutate(precip = 1e3 * 86400 * (precc + precl)) %>% ## m s^-1 --> mm d^-1
+    filter(precip > 0) %>% ## for logarithmic precip
+    filter(cdnc_ic > 20e6) %>%
+    lm(log10(lwp_ic) ~ log10(cdnc_ic) + log10(precip), ., na.action = na.omit)
+
+lm.e3sm.precip.nd <- df.e3sm.precip %>%
+    filter_sc() %>%
+    filter(precc == 0) %>%
+    mutate(precip = 1e3 * 86400 * (precc + precl)) %>% ## m s^-1 --> mm d^-1
+    filter(precip > 0) %>%  
+    filter(cdnc_ic > 20e6) %>%
+    lm(log(lwp_ic) ~ log(cdnc_ic), ., na.action = na.omit)
+
+lm.e3sm.precip.r <- df.e3sm.precip %>%
+    filter_sc() %>%
+    filter(precc == 0) %>%
+    mutate(precip = 1e3 * 86400 * (precc + precl)) %>% ## m s^-1 --> mm d^-1
+    filter(precip > 0) %>%  
+    filter(cdnc_ic > 20e6) %>%
+    lm(log(lwp_ic) ~ log(precip), ., na.action = na.omit)
+
+lm.e3sm.precip.binned <- df.e3sm.precip %>%
+    filter_sc() %>%
+    filter(precc == 0) %>%
+    mutate(precip = 1e3 * 86400 * (precc + precl)) %>% ## m s^-1 --> mm d^-1
+    discretize(precip, 6, equal_contents = TRUE, as_factor = TRUE) %>%
+    lm(log10(lwp_ic) ~ log10(cdnc_ic):precip, ., na.action = na.omit)
 
 ## @knitr e3sm-precip-exps-setup
 ## same as e3sm-precip-setup but for multiple experiments
@@ -570,20 +763,30 @@ df.ccn.max.fscu <- df.ccn %>%
 
 ## @knitr e3sm-ccn-met-plot
 df.ccn.met %>%
+    left_join(readRDS("../ne30pg2.rds") %>%
+              rename_with(tolower),
+              by = c("lon", "lat")) %>%
+    filter(landfrac == 0) %>%
     mutate(lon = ifelse(lon > 180, lon - 360, lon)) %>%
+    left_join(df.pblh.stats.v1 %>%
+              mutate(across(where(is.double), round)),
+              by = c("jk.max"="jk.pbl")) %>%
+    mutate(pblh = sprintf("{\\small $h=%d$ levels ($%d\\pm%d$ m)}", jk.max, mean, sd)) %>%
     ggplot(aes(lon, lat)) +
     geom_point(aes(col = CCN.sfc), size = 1.25) +
     geom_world_polygon() +
     geom_text(data = df.ccn.max.fscu %>% mutate(lon = ifelse(lon > 180, lon - 360, lon)), col = "black", label = "$\\star$") +
-    metR::geom_arrow(aes(mag = spd.700, angle = 180 * dir.700 / pi), size = 0.2,
-                     col = "black", alpha = 0.25) +
+    metR::geom_arrow(aes(mag = spd.700, angle = 180 * dir.700 / pi), 
+                     data = . %>% filter(ncol %% 4 == 0),
+                     size = 0.4, col = "black", alpha = 0.25) +
     scale_x_geo() +
     scale_y_geo() +
     metR::scale_mag("$|v|_{700\\text{~hPa}}$~(m~s$^{-1}$)", max_size = 0.75, max = 15) +
     coord_fixed(1, c(-150, -115), c(14, 36)) +
     scale_color_distiller("CCN (cm$^{-3}$)", palette = "YlOrBr", direction = 1) +
-    facet_wrap(~ jk.max, ncol = 3, labeller = as_labeller(function(jk.max) sprintf("PBL depth %s levels", jk.max))) +
-    theme(axis.title.x = element_blank()) +
+    facet_wrap(~ pblh, ncol = 3) + 
+    theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank()) +
     theme(legend.position = "bottom", legend.box = "horizontal") 
 
 ## @knitr e3sm-pblh-plot
@@ -597,20 +800,28 @@ df.e3sm.pblh <- df.profiles.jk.pbl %>%
 
 ggplot.pblh.bins <- df.e3sm.pblh %>%
     mutate(type = "") %>%
-    group_by(jk.pbl, type) %>%
+    left_join(df.pblh.stats.v1 %>%
+              mutate(across(where(is.double), round)),
+              by = c("jk.pbl")) %>%
+    mutate(pblh = sprintf("%d ($%d\\pm%d$ m)", jk.pbl, mean, sd)) %>%
+    group_by(pblh, type) %>%
     lwp.cdnc.conditional(cdnc.bins = exp(seq(log(3e6), log(3e8), length.out = 50)),
                          lwp.bins = exp(seq(log(0.95e-2), log(0.31), length.out = 25))) %>%
     replace_with_conventional_units() %>%
     lwp.cdnc.plot(marginal = TRUE,
-                  col = factor(jk.pbl, levels = 10:15), ## group = jk.pbl,
+                  col = pblh, ##factor(jk.pbl, levels = 10:15), ## group = jk.pbl,
                   lty = type,
                   expand = FALSE, cdnc.density.limits = c(0, 0.55),
-                  legend.position = c(0.35, 0.725)) 
+                  legend.position = c(0.475, 0.725)) 
 
 df.e3sm.pblh.summary <- df.e3sm.pblh %>%
     mutate(lwp_ic = ifelse(lcc > 0.9, lwp / lcc, NA),
            cdnc_ic = ifelse(lcc > 0.9, cdnc / lcc, NA)) %>%
-    group_by(jk.pbl) %>%
+    left_join(df.pblh.stats.v1 %>%
+              mutate(across(where(is.double), round)),
+              by = c("jk.pbl")) %>%
+    mutate(pblh = sprintf("%d ($%d\\pm%d$ m)", jk.pbl, mean, sd)) %>%
+    group_by(jk.pbl, pblh) %>%
     summarize(lwp_ic = exp(mean(log(lwp_ic), na.rm = TRUE)),
               cdnc_ic = exp(mean(log(cdnc_ic), na.rm = TRUE))) %>%
     replace_with_conventional_units() %>%
@@ -621,7 +832,7 @@ ggplot.pblh.bins[[3]] <- ggplot.pblh.bins[[3]] +
     geom_path(data = df.e3sm.pblh.summary, col = "black") +
     geom_path(data = df.e3sm.pblh.summary, aes(group = jk.pbl %/% 2), col = "black", arrow = grid::arrow(type = "closed", angle = 15, length = unit(0.05, "inches")), show.legend = FALSE) +
     geom_path(data = df.e3sm.pblh.summary, aes(group = (jk.pbl + 1) %/% 2), col = "black", arrow = grid::arrow(type = "closed", angle = 15, length = unit(0.05, "inches")), show.legend = FALSE) +
-    geom_point(data = df.e3sm.pblh.summary, aes(col = factor(jk.pbl, levels = 10:15))) +
+    geom_point(data = df.e3sm.pblh.summary, aes(col = pblh)) +  ## factor(jk.pbl, levels = 10:15))) +
     geom_line(data = df.profiles.fscu %>%
                   filter(ilev == 72) %>%
                   filter(lcc > 0.9, ttop > 273.15) %>%
@@ -722,6 +933,42 @@ ggplot.pblh.bins &
                    ## labs(x = "$N_d$ (in cloud, m$^{-3}$)") +
                    ## coord_cartesian(xlim = c(1e7, 1e8)),
                    ## ncol = 1, align = "v", rel_heights = c(3, 1))
+
+## @knitr e3sm-pblh-multilin
+lm.e3sm.pblh <- df.e3sm.pblh %>%
+    filter(precc == 0) %>%
+    left_join(df.pblh.stats.v1 %>%
+              mutate(across(where(is.double), round)),
+              by = c("jk.pbl")) %>%
+    mutate(pblh = mean) %>%
+    filter(cdnc_ic > 20e6) %>%
+    lm(log(lwp_ic) ~ log(cdnc_ic) + log(pblh), ., na.action = na.omit)
+
+lm.e3sm.pblh.nd <- df.e3sm.pblh %>%
+    filter(precc == 0) %>%
+    left_join(df.pblh.stats.v1 %>%
+              mutate(across(where(is.double), round)),
+              by = c("jk.pbl")) %>%
+    mutate(pblh = mean) %>%
+    filter(cdnc_ic > 20e6) %>%
+    lm(log(lwp_ic) ~ log(cdnc_ic), ., na.action = na.omit)
+
+lm.e3sm.pblh.binned <- df.e3sm.pblh %>%
+    filter(precc == 0) %>%
+    filter(cdnc_ic > 20e6) %>%
+    lm(log(lwp_ic) ~ log(cdnc_ic) : factor(jk.pbl), ., na.action = na.omit)
+
+## @knitr e3sm-pblh-stats
+df.pblh.summary.v1 <- df.entrain.aer.v1 %>%
+    mutate(jk.pbl = 73 - jk.pbl) %>%
+    plyr::ddply(~ jk.pbl, . %$% summary(h)) 
+
+df.pblh.stats.v1 <- df.entrain.aer.v1 %>%
+    mutate(jk.pbl = 73 - jk.pbl) %>%
+    group_by(jk.pbl) %>%
+    summarize(mean = mean(h),
+              sd = sd(h)) %>%
+    ungroup()
 
 ## @knitr multimodel-delta-pred-actual-setup
 df.multimodel.conditional <- df.multimodel %>%

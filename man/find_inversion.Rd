@@ -4,7 +4,7 @@
 \alias{find_inversion}
 \title{Find inversion}
 \usage{
-find_inversion(df, default.type = "jk.tinv")
+find_inversion(df, default.type = "jk.tinv", gradient.type = "p")
 }
 \arguments{
 \item{df}{data_frame grouped by all coordinate variables except lev}

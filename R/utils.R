@@ -41,6 +41,9 @@ adiabatic_lwp_from_tau_re <- function(tau, re) {
     5 * 1e3 * tau * re / 9
 }
 
+#' Define subsidence Sc region by location only (Zhang and Feingold
+#' 2023 lon-lat boxes)
+#' 
 #' @export
 #'
 regionalize_zhang <- function(lon, lat) {
@@ -58,8 +61,11 @@ regionalize_zhang <- function(lon, lat) {
            )))))
 }
 
+#' Define subsidence Sc region by season and location (annual-mean
+#' occurrence frequency of Medeiros and Stevens 2011 criteria)
+#' 
 #' @export
-#'
+#' 
 regionalize_seasonal <- function(month, lon, lat, fscu.annual, landfrac) {
     ifelse(landfrac > 0 | fscu.annual <= 0.3 | abs(lat) > 45,
            NA,
@@ -68,6 +74,27 @@ regionalize_seasonal <- function(month, lon, lat, fscu.annual, landfrac) {
            "NEA",
            "NEP"),
     ifelse(lat < 0 & month %in% c("Oct", "Nov", "Dec", "Jan", "Feb"),
+    ifelse(lon < 30 | lon > 330,
+           "SEA",
+    ifelse(lon > 60 & lon < 120,
+           "AUS",
+           "SEP")),
+    NA)))
+}
+
+#' Define subsidence Sc region by location only (annual-mean
+#' occurrence frequency of Medeiros and Stevens 2011 criteria)
+#' 
+#' @export
+#'
+regionalize_annual <- function(lon, lat, fscu.annual, landfrac) {
+    ifelse(landfrac > 0 | fscu.annual <= 0.3 | abs(lat) > 45,
+           NA,
+    ifelse(lat > 0,
+    ifelse(lon < 30 | lon > 330,
+           "NEA",
+           "NEP"),
+    ifelse(lat < 0,
     ifelse(lon < 30 | lon > 330,
            "SEA",
     ifelse(lon > 60 & lon < 120,
