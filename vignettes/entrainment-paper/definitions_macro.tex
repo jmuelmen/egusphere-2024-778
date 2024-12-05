@@ -1,0 +1,20 @@
+\def\bugeqs{%
+    h \Dh {(\rho\thetal)}t &= -\frac{\Delta F}{\cp} +
+                              \frac{\Lv R}{\cp} +
+                              \frac{\text{SH}}{\cp} + 
+                              \alert{E_\theta}(\thetal^+ - \langle\thetal\rangle) 
+                              \label{eq:budget-theta}\\
+    h \Dh {(\rho \qt)}t &= -R + \frac{\text{LH}}{\Lv} + 
+                          \alert{E_q}(\qt^+ - \langle \qt\rangle) 
+                          \label{eq:budget-q} \\
+    \rho|_{z=h}\left(\dd h t + \textbf{v}\cdot \nabla_{\!H} h\right) &= \alert{E_h} - \omega / g
+    \label{eq:budget-mass}
+}
+
+\def\pblderiv{%
+    \Dh{(\rho A)}{t} = \langle \rho\rangle \dd{\langle A \rangle}t +
+    \langle \rho \textbf{v}\cdot \nabla_{\!H} A \rangle +
+    \langle \rho\rangle (A|_{z=h^-} - \langle A\rangle)
+    \textbf{v}\cdot\nabla_{\!H}h
+    \label{eq:pblderiv}
+}
