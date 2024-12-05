@@ -1,0 +1,2139 @@
+%% Copernicus Publications Manuscript Preparation Template for LaTeX Submissions
+%% ---------------------------------
+%% This template should be used for copernicus.cls
+%% The class file and some style files are bundled in the Copernicus Latex Package, which can be downloaded from the different journal webpages.
+%% For further assistance please contact Copernicus Publications at: production@copernicus.org
+%% https://publications.copernicus.org/for_authors/manuscript_preparation.html
+
+
+%% Please use the following documentclass and journal abbreviations for preprints and final revised papers.
+
+%% 2-column papers and preprints
+\documentclass[acp, manuscript]{copernicus}
+
+
+
+%% Journal abbreviations (please use the same for preprints and final revised papers)
+
+
+% Advances in Geosciences (adgeo)
+% Advances in Radio Science (ars)
+% Advances in Science and Research (asr)
+% Advances in Statistical Climatology, Meteorology and Oceanography (ascmo)
+% Annales Geophysicae (angeo)
+% Archives Animal Breeding (aab)
+% Atmospheric Chemistry and Physics (acp)
+% Atmospheric Measurement Techniques (amt)
+% Biogeosciences (bg)
+% Climate of the Past (cp)
+% DEUQUA Special Publications (deuquasp)
+% Drinking Water Engineering and Science (dwes)
+% Earth Surface Dynamics (esurf)
+% Earth System Dynamics (esd)
+% Earth System Science Data (essd)
+% E&G Quaternary Science Journal (egqsj)
+% EGUsphere (egusphere) | This is only for EGUsphere preprints submitted without relation to an EGU journal.
+% European Journal of Mineralogy (ejm)
+% Fossil Record (fr)
+% Geochronology (gchron)
+% Geographica Helvetica (gh)
+% Geoscience Communication (gc)
+% Geoscientific Instrumentation, Methods and Data Systems (gi)
+% Geoscientific Model Development (gmd)
+% History of Geo- and Space Sciences (hgss)
+% Hydrology and Earth System Sciences (hess)
+% Journal of Bone and Joint Infection (jbji)
+% Journal of Micropalaeontology (jm)
+% Journal of Sensors and Sensor Systems (jsss)
+% Magnetic Resonance (mr)
+% Mechanical Sciences (ms)
+% Natural Hazards and Earth System Sciences (nhess)
+% Nonlinear Processes in Geophysics (npg)
+% Ocean Science (os)
+% Polarforschung - Journal of the German Society for Polar Research (polf)
+% Primate Biology (pb)
+% Proceedings of the International Association of Hydrological Sciences (piahs)
+% Safety of Nuclear Waste Disposal (sand)
+% Scientific Drilling (sd)
+% SOIL (soil)
+% Solid Earth (se)
+% The Cryosphere (tc)
+% Weather and Climate Dynamics (wcd)
+% Web Ecology (we)
+% Wind Energy Science (wes)
+
+
+%% \usepackage commands included in the copernicus.cls:
+%\usepackage[german, english]{babel}
+%\usepackage{tabularx}
+%\usepackage{cancel}
+%\usepackage{multirow}
+%\usepackage{supertabular}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{amsthm}
+%\usepackage{float}
+%\usepackage{subfig}
+%\usepackage{rotating}
+\usepackage{newtxmath}
+\usepackage{soul}
+
+\usepackage{todonotes}
+\newcommand{\jmu}{\ensuremath{j_\mu}}
+\newcommand{\temporary}[1]{}
+\newcommand{\jmucomment}[1]{\todo[inline, color=red!50]{\jmu: #1}}
+\newcommand{\jmcomment}[1]{\todo[inline, color=red!50]{\jmu: #1}}
+\newcommand{\egcomment}[1]{\todo[inline, color=brown!50]{\textbf{eg}: #1}}
+\newcommand{\yzcomment}[1]{\todo[inline, color=yellow!50]{\textbf{yz}: #1}}
+\newcommand{\jqcomment}[1]{\todo[inline, color=blue!50]{\textbf{jq}: #1}}
+\newcommand{\avcomment}[1]{\todo[inline, color=green!40]{\textbf{av}: #1}}
+\newcommand{\hwcomment}[1]{\todo[inline, color=brown!50]{\textbf{hw}: #1}}
+\newcommand{\dscomment}[1]{\todo[inline, color=purple!50]{\textbf{ds}: #1}}
+\newcommand{\mccomment}[1]{\todo[inline, color=orange!40]{\textbf{mc}: #1}}
+\newcommand{\agcomment}[1]{\todo[inline, color=cyan!40]{\textbf{AG}: #1}}
+\newcommand{\afcomment}[1]{\todo[inline, color=grey!40]{\textbf{af}: #1}}
+\newcommand{\aacomment}[1]{\todo[inline, color=gray!40]{\textbf{aa}: #1}}
+
+\newcommand{\omegaf}{\ensuremath{\omega_{500}}}
+\renewcommand\d[2]{\ensuremath{\frac{d#1}{d#2}}}
+\newcommand\D[2]{\ensuremath{\frac{D#1}{D#2}}}
+\newcommand\Dh[2]{\ensuremath{\frac{\hat{D}#1}{\hat{D}#2}}}
+\newcommand\dd[2]{\ensuremath{\frac{\partial#1}{\partial#2}}}
+\newcommand\ddp[2]{\ensuremath{\partial#1/\partial#2}}
+\newcommand\DDP[2]{\ensuremath{D#1/D#2}}
+\newcommand\alert[1]{#1}
+\newcommand\erfaci{ERF$_\text{aci}$}
+\newcommand\ralwp{\ensuremath{\text{RA}_\lwp}}
+\newcommand\racf{\ensuremath{\text{RA}_{\cf}}}
+\newcommand\erfaer{ERF$_\text{aer}$}
+%% \newcommand\degree{\ensuremath{{}^\circ}}
+\newcommand\cor{\ensuremath{\text{cor}}}
+\newcommand\na{\ensuremath{N_\text{a}}}
+\newcommand\nd{\ensuremath{N_\text{d}}}
+\renewcommand\ni{\ensuremath{N_\text{i}}} %% replaces "not in" set operator
+\newcommand\cdnc{\nd}
+\newcommand\lwp{\ensuremath{\mathcal L}}
+\newcommand\iwp{\ensuremath{\mathcal I}}
+\newcommand\twp{\ensuremath{\mathcal L} + \ensuremath{\mathcal I}}
+\newcommand\fc{\ensuremath{f_c}}
+\newcommand\cf{\fc}
+\newcommand\re{\ensuremath{r_e}}
+\newcommand\ql{\ensuremath{q_\text{l}}}
+\newcommand\qi{\ensuremath{q_\text{i}}}
+\newcommand\qt{\ensuremath{q_\text{t}}}
+\newcommand\thetal{\ensuremath{\theta_\text{l}}}
+\newcommand\Lv{\ensuremath{L_\text{v}}}
+\newcommand\cp{\ensuremath{c_{p}}}
+\newcommand\phase{\ensuremath{\varphi}}
+
+\newcommand\swcre{\ensuremath{\mathcal{S}_c}}
+
+\newcommand\fboptics{\ensuremath{\lambda_\text{o}}}
+\newcommand\fblifetime{\ensuremath{\lambda_\ell}}
+\newcommand\fbphase{\ensuremath{\lambda_{\phase}}}
+\newcommand\fbtwp{\ensuremath{\lambda_{\twp}}}
+
+\newcommand\susc[1]{\ensuremath{\partial\log #1/\partial\log \nd}}
+\newcommand\lwpsusc{\ensuremath{\susc{\lwp}}}
+\newcommand\esusc{\ensuremath{\susc{E}}}
+\newcommand\qsed{\ensuremath{Q_\text{sed}}}
+\newcommand\lwptend{\ensuremath{\partial\lwp/\partial t}}
+
+\newcommand\rhft{\ensuremath{\text{RH}_\text{ft}}}
+
+\newcommand\lon{\ensuremath{\lambda}}
+\newcommand\lat{\ensuremath{\phi}}
+
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+library(ncdf4)
+library(magrittr)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotutils)
+library(patchwork)
+library(mltools)
+
+## set global chunk options
+opts_chunk$set(fig.path='figure/', cache.path='cache/', 
+               fig.align='center', fig.show='hold', cache = TRUE, warning = FALSE, echo = FALSE, par=TRUE, crop = FALSE, results = 'hide', message = FALSE,
+               dev='tikz', fig.width=12 / 2.54,fig.height=12 / 2.54,out.width='12cm') ## ACP two-column figure width is 12 cm
+# options(digits=2)
+## knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+ggplot2::theme_set(ggplot2::theme_bw() + ggplot2::theme(legend.key = element_rect(fill = NA),
+                                                        legend.background = element_rect(fill = NA),
+                                                        plot.margin = margin(6, 6, 12, 12, "pt")))
+Sys.setenv(TEXINPUTS=sprintf("%s:", getwd()),
+           ## use UTC for POSIX time operations
+           TZ = "UTC")
+
+sc.region.label <- function(df) {
+    df %>%
+        mutate(region = factor(region, levels = c("NEP", "SEP", "NEA", "SEA", "AUS")))
+}
+
+labs_nd_lwp_conventional <- function(...) ggplot2::labs(...,
+                                                        x = tikz_replacements_unitful()["cdnc_ic.conventional"],
+                                                        y = tikz_replacements_unitful()["lwp_ic.conventional"])
+
+read_chunk("../lwp_cdnc.R")
+read_chunk("../feedback.R") ## until we can provide regionalize() as a package function
+read_chunk("../lwp_cdnc_mechanisms.R")
+read_chunk("../lwp_cdnc_mechanisms_supp.R") ## for supplemental figures
+read_chunk("../scm.R")
+read_chunk("../scm_supp.R") ## for supplemental figures
+@
+
+\begin{document}
+
+<<aer-noprecsup-setup-v2>>=
+@ 
+
+<<aer-noprecsup-v2-lwpratio>>=
+@ 
+
+<<e3sm-load-profiles>>=
+@ 
+
+<<aer-sc-setup-v1>>=
+@
+
+<<aer-sc-setup-v1>>=
+@
+
+<<aer-sc-setup-v2>>=
+@
+
+<<noprecsup-pd-pi-setup-v1>>=
+df.e3sm.noprecsup <-
+    bind_rows(readRDS("../data/compy/e3smv1_aer-EAMv1_nudged_2010-2011_noprecsup_pd.rds") %>%
+              mutate(period = "PD"),
+              readRDS("../data/compy/e3smv1_aer-EAMv1_nudged_2010-2011_noprecsup_pi.rds") %>%
+              mutate(period = "PI")) %>%
+    left_join(readRDS("../ne30pg2.rds") %>%
+              rename_with(tolower)) %>%
+    filter_warm() %>%
+    filter_ocean() %>%
+    calculate_incloud()
+@
+
+<<aer-sc-noprecsup-setup-v2>>=
+@ 
+
+% <<loadcode, results='hide', echo=TRUE, cache=FALSE>>=
+% ## load up-to-date package code until production version has stabilized
+% pkgload::load_code()
+% warning("Using beta version of mltools; remember to switch to release version")
+% @ 
+
+%% ------------------------------------------------------------------------ %%
+%  Title
+%
+% (A title should be specific, informative, and brief. Use
+% abbreviations only if they are defined in the abstract. Titles that
+% start with general keywords then specific terms are optimized in
+% searches)
+%
+%% ------------------------------------------------------------------------ %%
+
+% Example: \title{This is a test title}
+
+\title{Can GCMs represent cloud liquid water path adjustments to aerosol--cloud interactions?}
+
+%% ------------------------------------------------------------------------ %%
+%
+%  AUTHORS AND AFFILIATIONS
+%
+%% ------------------------------------------------------------------------ %%
+
+% Authors are individuals who have significantly contributed to the
+% research and preparation of the article. Group authors are allowed, if
+% each author in the group is separately identified in an appendix.)
+
+% List authors by first name or initial followed by last name and
+% separated by commas. Use \affil{} to number affiliations, and
+% \thanks{} for author notes.
+% Additional author notes should be indicated with \thanks{} (for
+% example, for current addresses).
+
+% Example: \authors{A. B. Author\affil{1}\thanks{Current address, Antartica}, B. C. Author\affil{2,3}, and D. E.
+% Author\affil{3,4}\thanks{Also funded by Monsanto.}}
+
+% \authors{=list all authors here=}
+%% \author{=list all authors here=}
+
+%% 
+\Author[1]{Johannes}{M\"ulmenst\"adt}
+\Author[2]{Andrew S.}{Ackerman}
+\Author[2]{Ann M.}{Fridlind}
+\Author[1]{Meng}{Huang}
+\Author[1]{Po-Lun}{Ma}
+\Author[1]{Naser}{Mahfouz}
+\Author[2]{Susanne E.}{Bauer}
+\Author[1]{Susannah M.}{Burrows}
+\Author[1]{Matthew W.}{Christensen}
+\Author[3]{Sudhakar}{Dipu}
+\Author[1]{Andrew}{Gettelman}
+\Author[1]{L.~Ruby}{Leung}
+\Author[2,4]{Florian}{Tornow}
+\Author[3]{Johannes}{Quaas}
+\Author[1]{Adam C.}{Varble}
+\Author[1]{Hailong}{Wang}
+\Author[1]{Kai}{Zhang}
+\Author[5,6]{Youtong}{Zheng}
+\affil[1]{Atmospheric, Climate and Earth Sciences Division, Pacific Northwest
+  National Laboratory, Richland, WA, USA}
+\affil[2]{NASA Goddard Institute for Space Studies, New York, NY, USA}
+\affil[3]{Leipzig Institute for Meteorology, Leipzig University, Leipzig, Germany}
+%\affil[6]{Boston College, Boston, MA, USA}
+% \affil[4]{Grantham Institute - Climate Change and the Environment, Imperial
+%   College London, UK}
+\affil[4]{Columbia University Center for Climate System Research, New York, NY, USA}
+\affil[5]{Atmospheric and Oceanic Science Program, Princeton University,
+  Princeton, NJ, USA}
+\affil[6]{Department of Earth and Atmospheric Science, University of Houston,
+  Houston, TX, USA}
+% \affil[9]{Texas A\&M University, College Station, TX, USA}
+% \affil[10]{Institute for Atmospheric and Climate Science, ETH Z\"urich, Zurich, Switzerland}
+% \affil[11]{Department of Mathematics and Statistics, University of Exeter, UK}
+% \affil[12]{Atmospheric, Oceanic and Planetary Physics, Department of Physics, University of Oxford, UK}
+% \affil[13]{Research Institute for Applied Mechanics, Kyushu University, Fukuoka, Japan}
+
+\correspondence{J.~M\"ulmenst\"adt (johannes.muelmenstaedt@pnnl.gov)}
+
+\runningtitle{Can GCMs represent cloud adjustments to aerosol--cloud interactions?}
+
+\runningauthor{M\"ulmenst\"adt et al.}
+
+\received{}
+\pubdiscuss{} %% only important for two-stage journals
+\revised{}
+\accepted{}
+\published{}
+
+%% These dates will be inserted by Copernicus Publications during the typesetting process.
+
+\firstpage{1}
+
+\maketitle
+
+\begin{abstract}
+  General circulation models (GCMs), unlike other lines of evidence, indicate that
+  anthropogenic aerosols cause a global-mean increase in cloud liquid water
+  path (\lwp), and thus a negative adjustment to radiative forcing of the climate by
+  aerosol--cloud interactions.  In part 1 of this manuscript series, we showed that this is true even
+  in models that reproduce the negative correlation observed in present-day
+  internal variability of \lwp{} and cloud droplet number concentration (\nd{}).
+  We studied several possible confounding mechanisms that could explain the
+  noncausal cloud--aerosol correlations in GCMs and that possibly contaminate
+  observational estimates of radiative adjustments.  Here, we perform
+  single-column and full-atmosphere GCM experiments to investigate the
+  causal model-physics mechanisms underlying the model radiative adjustment
+  estimate.  We find that both aerosol--cloud interaction mechanisms thought to be operating in real
+  clouds -- precipitation suppression and entrainment evaporation enhancement
+  -- are active in GCMs and behave qualitatively in agreement with physical
+  process understanding.  However, the modeled entrainment enhancement has a
+  negligible global-mean effect.  This raises the question whether the GCM
+  estimate is incorrect due to parametric or base-state representation errors,
+  or whether the process understanding gleaned from a limited set of canonical
+  cloud cases is insufficiently representative of the diversity of clouds in the
+  real climate.  Regardless, even at limited resolution, the GCM physics appears able to
+  parameterize the small-scale microphysics--turbulence interplay responsible for
+  the entrainment enhancement mechanism.  We suggest ways to resolve tension between
+  current and future
+  (storm-resolving) global modeling systems and other lines of evidence in
+  synthesis climate projections.
+\end{abstract}
+
+\section{Introduction}
+
+Increased aerosol concentration modifies cloud properties by increasing cloud
+droplet number, which initially makes clouds more reflective.  When the aerosol
+concentration increase is due to an agent external to the climate system, for
+example, anthropogenic emissions, this cloud-brightening aerosol--cloud
+interaction (ACI) exerts a negative radiative forcing (RFaci) on the climate.
+However, clouds then adjust to the cloud droplet number (\nd{}) perturbation by
+changing their liquid water path (\lwp{}) and cloud coverage; this enhancement
+or weakening of the instantaneous RFaci is called the radiative adjustment due
+to \lwp{} (\ralwp) or cloud fraction (\racf).
+
+General circulation models (GCMs) have long disagreed with other lines of evidence on
+the sign of \ralwp, predicting that anthropogenic aerosols
+increase \lwp{} when observational and large-eddy simulation (LES) estimates predict that \lwp{}
+decreases \citep{Bellouin2020}.  Recently, \citet{Christensen2023},
+\citet{Varble2023}, and \citet{Muelmenstaedt2024a}
+showed that several Coupled Model Intercomparison 6-generation GCMs \citep{Eyring2016} produce negative
+correlations between cloud droplet number concentration \nd{} and liquid water
+path \lwp{} in present-day internal variability.  This is welcome news, because
+the inability of GCMs to match observations was interpreted as GCMs' inability
+to represent enhanced cloud-top entrainment of dry air at high \nd.  Enhanced entrainment is the
+dominant \ralwp{} mechanism according to assessments based on multiple lines of
+evidence.
+
+However, even GCMs that produce negative \nd{}--\lwp{} correlations in the
+present day still predict an \lwp{} increase in response to anthropogenic aerosol emissions.  In other words, the causal
+response of the model climate to secular changes in aerosols has the opposite
+sign of the correlation in present-day internal variability.  This is
+concerning, for the negative correlation in observations is one pillar on
+which the sign of \ralwp{} rests in assessments based on multiple
+lines of evidence.  Part 1 of this manuscript series \citep{Muelmenstaedt2024a}
+offered several hypotheses for confounders that could produce a noncausal
+negative correlation between \nd{} and \lwp{}.
+
+In this
+manuscript, we return to entrainment-mediated evaporation of
+clouds as an adjustment
+mechanism and the question whether this mechanism is represented in GCMs.  If so, then GCMs
+would also agree with the second pillar on which our multiline assessment of
+\ralwp{} rests: LES of cloud
+turbulence--microphysics interactions that shows a causal mechanism by which
+increased droplet number results in increased entrainment drying of
+stratocumulus cloud \citep{Ackerman2004,Bretherton2007}.  We will show that a
+broadly similar causal mechanism appears to exist in GCMs.  This is also
+concerning, because the GCM results suggest that the well-understood and
+exhaustively LES-modeled \ralwp{} in subtropical stratocumulus (Sc) clouds may not be
+representative of the global-mean \ralwp.
+
+The results of \citet{Muelmenstaedt2024a} and this manuscript, taken together, 
+complicate the \citet{Bellouin2020} picture of reduced \lwp{} in response to
+anthropogenic aerosol.  It is possible that the known weaknesses of the tools at
+our disposal (observations, process modeling, and global modeling) are causing
+us to misunderstand the sign of \ralwp.  We conclude with
+recommendations for using the complementary strengths of our tool set to
+increase the robustness of multiline assessments of ACI adjustments.
+
+%% save this part for PPE paper:
+% Our results suggest that
+% these mechanisms are represented and active in models and contribute to the
+% negative \nd{}--\lwp{} correlation, so the correlation is actually partially
+% causal.  However, the entrainment mechanisms are neither the dominant \lwp{}
+% adjustment mechanism nor the dominant contributor to the negative correlation.
+
+\section{Data and methods}
+\label{sec:data-methods}
+
+The hypothesis that our methods are designed to test is that a causal connection
+exists between \nd{} and \lwp{} in GCM physics that proceeds via enhanced
+cloud-top entrainment.  Thus, we focus on causal and mechanism-denial
+experiments in single-column and three-dimensional (3D) atmosphere runs to elucidate the causal link
+between \nd{} and \lwp{}, and on diagnostics of cloud-top entrainment to ascertain
+that enhanced entrainment is involved in \ralwp.
+
+\subsection{Models}
+\label{sec:models}
+
+We use two of the three CMIP6-era models analyzed by \citet{Muelmenstaedt2024a}
+that produce an ``inverted v''-shaped \nd--\lwp{} correlation: the
+U.S.~Department of Energy Exascale Earth System Model (E3SM) and NASA Goddard
+Institute for Space Studies (GISS) ModelE3.  These models have different
+turbulence schemes; as entrainment-mediated ACI mechanisms must involve at least
+the turbulence and microphysics parameterizations, it was desirable to include
+model diversity in this study.  ModelE3 and E3SM are used in single-column mode
+(Sect.~\ref{sec:single-column-model} and \ref{sec:entr-aci-mech-scm}).  E3SM
+is also used in 3D atmosphere runs (Sect.~\ref{sec:3d-gcm-configuration},
+\ref{sec:gcm-effect-entr}, and \ref{sec:entr-aci-mech-3d}).
+
+In part 1, we used E3SMv1; here we use E3SMv2 \citep{Golaz2022} instead because
+it is significantly more efficient at archiving the large, high-frequency fields
+required for the entrainment diagnostics.  E3SMv2 differs from v1 largely in the
+parametric tuning \citep{Ma2022} rather than in changes to the physics
+formulation.  The \nd--\lwp{} relationship documented in E3SMv1 persists in
+E3SMv2 for Sc clouds (Fig.~\ref{fig:nd-lwp-v1-v2-si}).
+
+In part 1, we used a ModelE3 parameter tuning derived through machine learning;
+here we use the default tuning from the ModelE3 development team, which
+produces a very similar \nd--\lwp{} relationship but does not produce the
+oscillations in surface precipitation at the lowest \nd values that resulted
+from an assertive subgrid-scale multiplier tuning of autoconversion in
+nonturbulent layers.
+
+\subsection{Cloud selection}
+\label{sec:cloud-selection}
+
+<<precc-frac>>=
+precc.frac <- sprintf("%.1f",  100 * with(df.entrain.aer.noprecsup.golden, mean(precc != 0)))
+@ 
+
+As the process understanding of entrainment-mediated \ralwp{} is based chiefly
+on a small number of canonical subsidence Sc cases, our main focus is
+on understanding this cloud type in the GCMs, as well.  Thus, while the
+eventual goal is to understand the full spectrum of clouds that occur in the
+real atmosphere, for now we apply a restrictive set of criteria to maximize the
+similarity between model clouds and Sc:
+\begin{itemize}
+\item warm (cloud-top temperature warmer than freezing and zero ice water path),
+  overcast (cloud fraction $f > 0.9$) columns, 
+\item in locations where the dynamic--thermodynamic criteria of
+  \citet{Medeiros2011} -- on pressure vertical velocity $\omega$ at 700 and 500 hPa
+  ($\omega_{700\text{ hPa}} > 10~\text{hPa d}^{-1}$ and
+  $\omega_{500\text{ hPa}} > 10~\text{hPa d}^{-1}$) and lower tropospheric
+  stability (potential temperature difference
+  $\theta_{700\text{ hPa}} - \theta_{1000\text{ hPa}} > 18.55$~K) -- are met at
+  least 30\% of the time in the annual mean (see part 1),
+\item during Sc season (northeastern Pacific: Jun--Aug; southeastern Pacific and
+  southeastern Atlantic: Oct--Feb),
+\item and with an inversion between model levels 10 and 15 from the surface
+  (approximately 750--1400~m).
+\end{itemize}
+We also remove cases where the parameterized convection is triggered, as this
+introduces transport through the planetary boundary layer (PBL) top that is not considered in the
+entrainment diagnostics (Sect.~\ref{sec:entr-diagn}).  In the single-column
+experiments (Sect.~\ref{sec:single-column-model}), the convection scheme does
+not trigger in either ModelE3 or E3SM.  In E3SM, the ``shallow'' convection
+parameterization is part of the Cloud Layers Unified By Binormals
+\citep[CLUBB;][]{Golaz2002,Larson2017} cloud macrophysics and turbulence scheme,
+which does not produce ``nonlocal'' (i.e., across multiple vertical levels in
+one time step) transport through the PBL top.  The ``deep'' convection scheme in
+E3SM \citep{Zhang1995,Xie2019} occasionally triggers in the 3D atmosphere run
+even in the stratocumulus-like conditions we select for; these columns make up
+$\Sexpr{precc.frac}$\% of the
+total and are removed from the analysis.  The occurrence of deep convection
+is rare enough that we do not attempt to analyze its effect on time steps after
+the removed deep-convective time step.
+
+These cloud requirements reduce the complication that the cloud sample may
+comprise different cloud regimes governed by different ACI mechanisms
+\citep{Muelmenstaedt2018}, ensure validity of the cloud-top entrainment
+diagnostics, and avoid difficulties in the interpretation of cloud-top
+entrainment in partly cloudy model columns.
+
+%% Figure of well mixed profiles: \ref{fig:pbl-profiles}
+
+\subsection{Single-column model experiments}
+\label{sec:single-column-model}
+
+We use an extensively studied, idealized subsidence Sc-like case
+specification to construct single-column experiments that are designed to investigate the
+mechanisms underlying the response of entrainment and \lwp{} to \nd{} in GCM physics.
+
+\subsubsection{DYCOMS-II RF02 case description}
+The initial conditions and forcings for the single-column models (SCMs) follow the specifications of
+\citet{Ackerman2009} for an intercomparison of lightly drizzling Sc.  This setup is
+based on measurements during research flight 2 (RF02) of the second Dynamics and Chemistry of Marine Stratocumulus (DYCOMS-II) field
+study off the California coast \citep{Stevens2003,vanZanten2005}, obtained from horizontally averaging a notably
+heterogeneous field of somewhat heavily drizzling open cells within barely
+drizzling closed cells. With regard to the sensitivity of cloud thickness to
+entrainment in this case, the inversion is sufficiently strong and the overlying
+air sufficiently dry that it is not close to the ``cloud deepening through
+entrainment'' regime of \citet{Randall1984}, and thus entrainment is expected to thin the cloud layer, as found in the LES intercomparison. [As an aside, we note that there is a sign error in equation (3) of \citet{Ackerman2009} specifying the total moisture profile above the inversion: the difference in the innermost brackets should be $z_i - z$ rather than $z-z_i$ as written.]
+
+The \citet{Wyant2007} SCM intercomparison study used nearly the same setup as \citet{Ackerman2009}, and both studies found that including drizzle and cloud droplet sedimentation generally slowed entrainment and enhanced domain-mean liquid water path among a variety of models. Like the previous LES intercomparison of nocturnal Sc by \citet{Stevens2005}, the idealized setup ignored horizontal advective tendencies of cooling and drying associated with the large-scale flow for subtropical Sc decks as well as any solar radiation, consistent with the approximately 5-h aircraft sampling a nocturnal boundary layer air along an approximately Lagrangian trajectory. These and other simplifications such as constant subsidence and turbulent surface fluxes are consistent with the 6-hour simulation duration for the DYCOMS-II RF02 intercomparisons.
+
+\subsubsection{GISS ModelE3 SCM description}
+The GISS ModelE3 SCM is a single-column version of the ModelE3 GCM that includes
+a number of updates to the column moist physics, as summarized in \citet{Cesana2021} and described in more detail by \citet{Cesana2019};
+unpublished manuscripts will document the model physics parameterizations more
+completely and also discuss the machine-learning approach to tuning the atmospheric
+model. In SCM mode the resolved advection is neglected and vertical advection is
+treated by multiplying the vertical wind by the local gradient of all prognostic
+variables, as done for LES with periodic lateral boundary conditions \citep[e.g.,][]{Stevens2005, Ackerman2009} to avoid complications
+associated with representing a divergent flow in a one-dimensional framework. The ModelE3 SCM allows
+for a number of specified forcings to override the native model
+parameterizations, which for this case consists of the following: (1) the radiative transfer uses a Beer's Law treatment that computes cloud-top cooling and cloud-base warming from the respective cumulative water paths downward from above and upward from below, (2) geostrophic wind forcing is computed as in the LES framework using a fixed profile of geostrophic wind and the prescribed latitude, and (3) the surface drag is computed using a fixed friction speed.
+
+For the ModelE3 SCM simulations here, we depart from the DYCOMS-II RF02 LES intercomparison
+specification in two ways. For the sake of simplicity, instead of a bimodal
+cloud condensation nuclei (CCN) distribution we
+specify a single lognormal mode of ammonium bisulfate with geometric mean radius
+60 nm and geometric standard deviation 1.7. We also extend the duration of the
+simulations to 24~h to check whether the clouds reach a steady
+state in each model; the latter half (hours 12.5--24) is not further
+analyzed. 
+
+Appendix~\ref{sec:tracing-les-scm} compares the SCM
+behavior against LES and assesses variations in the SCM setup that differ from those used for the E3SM SCM.
+
+\subsubsection{E3SM SCM description}
+The E3SM SCM is described in \citet{Bogenschutz2020}.  DYCOMS-II RF02 is part of
+the standard E3SM SCM case library.  The main differences compared with the
+ModelE3 SCM are as follows.  Since E3SMv2, the SCM
+uses the same vertical advection scheme as the three-dimensional model.  The
+idealizations active in the baseline experiment are prescribed surface heat
+fluxes, prescribed geostrophic wind, prescribed profile of divergence, and
+prescribed bimodal aerosol profile, as in the ModelE3 setup.  Prescribing the
+surface wind stress or friction velocity is not supported in the E3SM SCM;
+during spinup, the SCM stabilizes to $u_*\approx 0.4$~m~s$^{-1}$, substantially
+higher than the DYCOMS-II RF02 case specification ($u_*= 0.25$~m~s$^{-1}$).  
+
+Differences in model configuration in sensitivity experiments and \nd{}
+susceptibility scans are described in the discussion of those experiments.
+
+\subsection{3D GCM configuration}
+\label{sec:3d-gcm-configuration}
+
+% \jmcomment{Move cloud selection into this section (since it only applies to the
+%   E3SM Sc analysis)}
+
+The models analyzed in part 1 produced
+$\ralwp < 0$ in the default model configuration, presumably because of precipitation suppression.  To disentangle the
+opposing \ralwp{} of precipitation suppression and a potential entrainment
+mechanism ($\ralwp > 0$), we turn off the precipitation suppression in E3SM by
+setting the exponent on \nd{} in the autoconversion parameterization to zero,
+removing the explicit \nd-dependence of the autoconversion process.  To maintain
+a climate state similar to the default model, we increase the
+autoconversion scale factor \citep{Mahfouz2024}. This is equivalent to
+presenting autoconversion with a globally constant $\nd \approx 50$~cm$^{-3}$
+and results in present-day top-of-atmosphere radiative flux and cloud radiative effect changes $<1$
+W~m$^{-2}$ compared with the default configuration.  The warm-cloud
+over-ocean mean is $\log \lwp_\text{PD} - \log \lwp_\text{PI} =
+\Sexpr{aer.noprecsup.lwp.pd.pi}$ in this configuration, compared with $3.2\times 10^{-2}$
+in the default configuration.  This indicates that switching off the
+precipitation suppression mechanism eliminates the strong negative $\ralwp$ of
+the default model configuration but does not expose a strong positive $\ralwp$
+in its stead.  The \nd--\lwp{} correlation becomes more negative in Sc clouds
+when precipitation suppression is turned off (Fig.~\ref{fig:nd-lwp-si}) compared
+with when precipitation suppression is active.
+
+\subsection{Entrainment diagnostics}
+\label{sec:entr-diagn}
+
+As the causal ACI mechanism hypothesized to lead to $\ralwp > 0$ is enhanced
+entrainment with increasing \nd, we make it a focus of this paper to understand
+how entrainment behaves in the models.  To this end, we use an entrainment
+diagnostic that calculates the mixing between free troposphere (FT) and
+well-mixed boundary layer as a residual term in the mixed-layer budgets of water
+and temperature.  Note that we do not include budget terms for nonlocal
+transport through the
+PBL top by parameterized convection schemes.  This limits the applicability of
+the diagnostics to strictly stratocumulus-topped boundary layers (excluding,
+e.g., the stratocumulus-to-cumulus transition), which the
+subsidence-based and stability-based regional selection
+(Sect.~\ref{sec:cloud-selection}) is intended to enforce.
+
+<<definitions, results='asis', cache=FALSE>>=
+cat(readLines("../entrainment-paper/definitions_macro.tex"), sep = "\n")
+@ 
+
+Let $q_\text{v}$ and $\ql$ be water vapor and liquid mixing ratio, $\theta$ and $T$
+potential temperature and temperature.
+In adiabatic expansion and condensation, the total water mixing ratio
+\begin{equation}
+  \qt = q_\text{v} + \ql
+\end{equation}
+and liquid-water potential temperature $\thetal$ are conserved; we approximate
+\begin{equation}
+  \thetal = \theta - \frac{\Lv}{\cp}\frac{\theta}{T}\ql,
+\end{equation}
+with $\Lv$ the latent heat of evaporation of water (which, for simplicity, we
+take as temperature-independent, using its value at 273~K) and $\cp$ the isobaric specific heat
+of dry air.  Budget equations for 
+$\thetal$, $\qt$, and total mass, vertically integrated over the PBL, involve fluxes of water, dry air, and heat across the
+boundaries of the PBL \citep{Lilly1968,Stevens2002,Caldwell2005,Kalmus2014,Mellado2017}.  
+Crucially for our purposes, this includes the entrainment flux into the boundary layer.  We
+express the budget equations following \citet{Kalmus2014} but modify the
+notation to highlight the similarity with source and sink terms in a
+prognostic equation in Lagrangian form:
+%
+\begin{align}
+  \bugeqs,
+\end{align}
+%
+where $\rho$ is the density, $\Delta F$ the radiative cooling, $R$ the
+precipitation mass flux at the surface, $\text{LH}$ and $\text{SH}$ the latent and sensible
+heat fluxes at the surface, $h$ the PBL geometric depth, $\textbf{v}$ the
+wind vector, $\omega=Dp/Dt$ the
+large-scale pressure velocity, and $g$ the gravitational acceleration.  The
+operator $\nabla_H$ is the horizontal gradient.
+Quantities with a $+$ superscript [i.e., $\qt^+$ and $\thetal^+$ in (\ref{eq:budget-theta})--(\ref{eq:budget-q})] are evaluated
+just above the inversion.
+Quantities in angular brackets ($\langle A \rangle$) are mass-weighted vertical
+averages of a quantity $A$, evaluated at model-level midpoints $k$ between the
+lowermost atmosphere level $k_\text{sfc}$ and the uppermost level below the
+inversion $k_\text{pbl}$:
+\begin{equation}
+  \langle A \rangle = \frac{1}{\langle \rho \rangle
+    h}\sum\limits_{k=k_\text{sfc}}^{k_\text{pbl}}\rho_k\Delta z_k A_k;
+\end{equation}
+the PBL-averaged material derivative of a 3D quantity $A$ is defined as
+%
+\begin{equation}
+  \pblderiv.
+\end{equation}
+The PBL-averaged material derivative differs from the conventional material
+derivative in two ways.  First, vertical advection is absent, as the motion of
+the boundary between PBL and free troposphere does not affect the within-PBL
+average.  Second, the final term in (\ref{eq:pblderiv}) accounts for the
+horizontal advection of the PBL top; the $A|_{z=h^-}$ notation indicates the
+field is to be evaluated just below the inversion.
+
+Each of
+the budgets of $\thetal$, $\qt$, and $h$
+(\ref{eq:budget-theta})--(\ref{eq:budget-mass}) can be solved for an entrainment mass
+flux: $E_\theta$, $E_q$, and $E_h$, respectively.  Physically,
+\begin{equation}
+  \label{eq:entrainment-equiv}
+  E_\theta = E_q = E_h.
+\end{equation}
+However, models do not necessarily respect this equality.  Therefore, we retain the
+freedom to diagnose $E_\theta$, $E_q$, and $E_h$ separately; in the following,
+we use the degree of equality between these fluxes as a criterion for model
+fidelity to the physical system.
+
+% \hl{Note $E_q$ and $E_\theta$ can be calculated as residuals from the budgets,
+%   the remaining terms being available from the model.}
+
+% Budget equations of $q_t$ and $\theta_l$
+% vertically integrated over a specified volume thus receive contributions from
+% the fluxes across the boundaries of the volume:
+
+% the vertical profiles of $q_t$ and $\theta_l$
+% are constant over the height of the boundary layer in the well-mixed limit
+
+
+
+% In our analysis, we used the fixed-SST runs with nudged meteorology described in
+% \citet{Muelmenstaedt2024a}.  % We also used an E3SM perturbed-physics ensemble
+% (PPE) that varied numerous precipitation microphysics and CLUBB turbulence
+% parameters \citep{Ma20xx}.  \jmucomment{Cite Po-Lun's paper or describe here.}
+
+% In addition, we performed single-column PPE experiments on idealized
+% stratocumulus cases.  \jmucomment{Setup.}
+
+% Methods: $P(\lwp|\nd)$ analysis and inverted v fits; entrainment diagnostics;
+% SCM causal $\lwp(\nd)$ plots
+  
+\section{Results}
+
+In Sect.~\ref{sec:gcm-effect-entr}, we describe the effective entrainment in the
+Sc regime in E3SM according to the entrainment diagnostics introduced in
+Sect.~\ref{sec:entr-diagn}.  We analyze which properties of the atmospheric
+column influence the entrainment.  To perform an unambiguous demonstration of a
+causal effect of increased aerosol on entrainment and PBL drying, we then turn
+to SCM analysis in ModelE and E3SM in Sect.~\ref{sec:entr-aci-mech-scm}.  We
+return to the 3D atmosphere in a model configuration without precipitation
+suppression in Sect.~\ref{sec:entr-aci-mech-3d} to search for evidence of a
+causal mechanism leading to reduced \lwp{} in response to anthropogenic aerosols.
+
+% Both models qualitatively reproduce the \lwp{} adjustment mechanism whereby
+% increased \nd{} leads to increased cloud-top entrainment, which leads to a
+% reduction in \lwp.  There is great diversity, however, in pathways between E3SM's and
+% ModelE3's SCM (described in Sec.~\ref{sec:entr-aci-mech-scm}) and between E3SM's SCM and 3D
+% atmosphere runs (described in Sec.~\ref{sec:entr-aci-mech-3d}).
+
+\subsection{GCM effective entrainment}
+\label{sec:gcm-effect-entr}
+
+In a numerical model, the spatial discretization can potentially alter the
+behavior of the PBL in a qualitative way.  The physical Sc-topped PBL
+entrains free-tropospheric air by $O(1~\text{m})$-scale turbulent exchange through
+a sharp buoyancy barrier \citep[and references therein]{Wood2012}.  In the
+model, the static stability due to thermodynamic jumps across the inversion at
+PBL top is less localized and weaker due to the finite vertical resolution.  Depending on
+the model resolution, the resolved-scale advection scheme, and the turbulence
+parameterization, vertical mixing across the poorly resolved inversion may
+be too strong.  This can occur because the stability reported to the turbulence
+scheme is underestimated or because fluctuations in
+the resolved-scale vertical velocity mix the airmasses instead of moving the
+boundary between them.  Collectively, we
+term these behaviors ``model artifacts''.  The problem with model artifacts in mixing is that the
+effect of such mixing on the PBL temperature and humidity need not have the correct susceptibility to
+the multitude of anthropogenic perturbations -- forcing by and adjustments to both
+aerosol and greenhouse-gas forcings, as well as feedback mechanisms in response
+to anthropogenic global warming -- that are hypothesized to influence cloud-top entrainment
+by changing the atmospheric state (\nd, temperature and humidity in the PBL
+and FT, and FT emissivity).  
+
+Therefore, our task is to determine whether the mixing in the model
+behaves more like physical entrainment or more like artificial mixing.  
+If we calculate $E_\theta$, $E_q$, and $E_h$ in
+(\ref{eq:budget-theta})--(\ref{eq:budget-mass}) as residuals, 
+then they describe the
+mixing between PBL and FT, including both the entrainment and
+model artifacts.  We then apply three criteria that help us make that
+determination:
+\begin{enumerate}
+\item In the real atmosphere, $E_\theta = E_q = E_h$
+all describe the same entrainment mass flux that comes about due to
+turbulent processes at the boundary-layer top.  In a numerical model,
+however, equality of the entrainment fluxes is not a given.  For one
+thing, models treat $\thetal$ and $\qt$ differently, for example, to ensure nonnegative-definite $\qt$.  For
+another, the length scales at which entrainment occurs reach below
+1~m, far beyond the resolved dynamics of most types of models. Mixing
+between the boundary layer and FT in a model, therefore,
+results from a combination of resolved advection and
+parameterizations. %  A priori, the ``effective'' entrainment in a model could be
+% any combination of actual entrainment-like behavior and numerical diffusion; we
+% might expect the latter to become increasingly important as the vertical
+% discretization is coarsened and the buoyancy barrier to mixing at the inversion
+% becomes increasingly poorly resolved.
+% \hl{In the
+% following, we describe three criteria that help us make that determination.}
+Having multiple independent measures of the entrainment mass flux 
+affords us the ability to ask both whether the model-diagnosed entrainment
+estimates are consistent and whether they are physical.  Consistent
+fluxes are highly correlated, with $E_q$, $E_\theta$, and $E_h$ close to a
+1:1 regression
+slope.  (In an Eulerian model, $E_h$ is difficult to diagnose when the advective
+tendency of $h$ over a model time step is small compared to the vertical
+resolution, which is the case in GCMs.  We restrict our analysis to $E_q$ and
+$E_\theta$.) 
+\item Even if the diagnosed entrainment fluxes are consistent, however, they can still be
+unphysical.  That is, the mass flux could be detraining air out of the
+boundary layer instead of entraining into the boundary layer.
+\item Finally, the dependence of the entrainment flux on atmospheric
+conditions can indicate that the wrong mechanisms are at work in the
+model.  For example, a strong dependence of entrainment on the
+FT vertical velocity would indicate overly strong
+vertical advection through the capping inversion.  
+\end{enumerate}
+
+Thus, we propose
+three measures of the realism of the entrainment representation in a
+model: the joint distribution of $E_\theta$ and $E_q$, the
+sign of the mass flux, and the dependence of the entrainment flux on
+the atmospheric state.
+
+% \hl{Work in somewhere:} The budget receives contributions from horizontal advection within the PBL but not from
+% vertical advection, which changes the vertical extent of the PBL but does not
+% immediately lead to changes of the airmass properties within the PBL.
+
+Under Sc conditions (as defined in Sec.~\ref{sec:cloud-selection}), E3SM
+produces vertical profiles of $\qt$ and $\thetal$ consistent with a
+fairly well-mixed PBL capped by a fairly sharp thermodynamic jump.
+Figure~\ref{fig:pbl-profiles} shows composite vertical profiles stratified by
+PBL depth.  % Thus, calculating the entrainment fluxes from the mixed-layer
+% budgets can be expected to yield valid results.
+
+The effective entrainment qualitatively agrees very well with physical
+understanding of the Sc-topped PBL.  The fluxes derived from the separate
+budgets agree well with each other, yielding a close relationship with slope
+near 1 (see joint probability in Fig.~\ref{fig:entrainment-scatter}).
+Furthermore, the sign of the fluxes is consistent with physical entrainment from
+the FT into the PBL ($E>0$; see the marginal cumulative
+distribution functions in Fig.~\ref{fig:entrainment-scatter}) rather
+than showing a distribution including
+both positive and negative values, which would be consistent with numerical diffusion.  The
+instantaneous entrainment also qualitatively responds in the expected way to
+instantaneous variability (as opposed to climatological spatial variability,
+seasonal temporal variability, etc.) in properties of the
+atmospheric column (Fig.~\ref{fig:entrainment-controls}).  Entrainment increases
+with surface heat fluxes and cloud-top radiative cooling, consistent with
+increased turbulence production leading to increased entrainment; decreases with the
+magnitude of the $\thetal$ jump at the inversion, consistent with a
+stronger buoyancy barrier suppressing entrainment (the negative $\qt$ jump,
+which reduces the buoyancy barrier, is strongly correlated with the positive
+$\thetal$ jump); and is independent of the 
+instantaneous grid-scale vertical velocity, consistent with large-scale
+subsidence moving the boundary between airmasses (i.e., the FT and
+the PBL) rather than mixing them.
+
+In summary, the entrainment behavior of the GCM, according to the criteria
+tested for, appears
+free of 
+numerical artifacts that are due to coarse model resolution.  While not exhaustive (e.g.,
+the effect of mixing on the model levels above the inversion is not examined),
+these entrainment diagnostics allow us to compare the GCM physics to the
+foundational LES modeling studies on Sc entrainment
+\citep[e.g.,][]{Ackerman2004,Bretherton2007,Ackerman2009}, which diagnose
+entrainment from the entrainment velocity, i.e., the PBL mass budget.
+We next focus
+on the effects of anthropogenic perturbations on the modeled
+entrainment and on how the parameterized model physics affects those
+entrainment responses.
+
+\subsection{Entrainment ACI mechanism in single-column runs}
+\label{sec:entr-aci-mech-scm}
+
+Figure~\ref{fig:entrainment-controls} shows that entrainment depends on numerous
+properties of the atmospheric column.  This creates a bewildering web of
+possible causal and covariability effects by which entrainment internal variability could be
+correlated with aerosol internal variability in 3D atmosphere runs.
+SCM runs, in contrast, provide a clean way to diagnose cause and effect in GCM column physics,
+which is a reason they are widely used during model development.  First, the SCM allows us to hold any
+combination of boundary conditions on a single column fixed.  Thus, we can
+switch off any effects
+mediated by the grid-scale horizontal circulation.  These effects
+includes synoptic-scale confounders of the type discussed by
+\citet{Muelmenstaedt2024a}.  Second, and relatedly, we are free to explore the
+effects of model physics on ACI without having to retune the model to
+global-mean energy balance.  Thus, we avoid the difficult problem whether to attribute
+changes in model behavior to the physics changes under investigation versus the
+nuisance changes required to restore energy balance that might also affect
+the ACI behavior
+\citep[e.g.,][]{Golaz2011,Muelmenstaedt2020,Muelmenstaedt2021}.
+
+A welcome side effect (and a raison d'{\^e}tre) of SCM use is that the experiment setup closely matches the
+LES runs that inform so much of our process understanding. Like
+\citet{Ackerman2004}, \citet{Bretherton2007}, and \citet{Hoffmann2020}, we can focus on
+well-understood subtropical subsidence-region Sc and vary one boundary
+condition -- the aerosol concentration -- at a time (and, if desired, one model-physics mechanism at a time).
+This does not address the question whether the model results are representative of
+the global-mean effective radiative forcing -- that is best addressed with global runs -- but it answers
+the question whether LES and GCM column physics respond similarly to perturbations
+around an as-near-as-possible identical base state.
+
+The E3SM SCM uses the two-mode prescribed aerosol concentration profile
+specified for RF02 \citep{Wyant2007}, while the ModelE3 SCM uses a single accumulation mode aerosol size distribution as described above.  We then modify the amplitude of this
+profile to elucidate the causal effect of \nd{} change on \lwp.
+In the ModelE3
+SCM, we scan the aerosol number concentration
+$\na = \{20, 30, 40, 60, 80, 120, 160, 320, 640\}$~cm$^{-3}$.  In the E3SM SCM,
+we scale the prescribed aerosol concentration up and
+down by a factor of 8: $\na = N_{\text{a}_0} \times \{  1/8, 1/4, 1/2, 1, 2, 4, 8\}$.
+% The activation is not under investigation in this study, so the objective 
+% of these scans is to generate \nd{} diversity.
+Prescribing aerosol eliminates ACI mechanisms in which clouds affect the aerosol
+state, such as potential effects of aerosol scavenging on the \nd--\lwp{}
+relationship \citep{McCoy2020a}. This simplifies the attribution of \lwp{}
+responses to \nd{} perturbations by removing one class of processes from
+consideration. 
+
+Figures~\ref{fig:giss-scm-timeseries} and \ref{fig:e3sm-scm-timeseries} show the
+ModelE3 and E3SM SCM time series.  In both models, the PBL deepens, indicating
+entrainment in excess of the subsidence rate; the PBL 
+in both models also deepen a similar amount when native longwave radiative transfer is used (see Appendix).
+With the exception of a short duration before and after 
+steps in the discretized PBL depth in E3SM, both models maintain an overcast cloud; the loss of cloud cover in E3SM's SCM when the PBL top jumps by a
+model level is clearly a model artifact, so these periods are excluded from
+further analysis by requiring $f>0.9$, as in the 3D model analysis both here and
+in part 1.  Furthermore, the discrete PBL depth increases are associated with
+discontinuities in the entrainment diagnostics: a dependence of $E$ on how long
+the top model level of the PBL has been subject to entrainment in E3SM, and a
+reversion to a constant $E$ once the PBL has deepened in ModelE3.  We may be
+mitigating the E3SM
+artifact by averaging over two full deepening cycles, effectively averaging over
+the dependence of $E$ on position in the deepening cycle.  We attempt to
+mitigate the ModelE3 artifact by only averaging $E$ until the first PBL
+deepening occurs.  This choice is subjective, and we note that the other obvious choice, which
+is to average the entrainment over the same time period (hours 2--12) as the
+other variables, produces no clear relationship between $E$ and \nd.  However,
+the problem with this averaging method is that earlier deepening in the more
+entraining cases means that these cases spend more time in the apparent low-entrainment
+state that characterizes the entrainment-diagnostics artifact, which most
+strongly lowers the average apparent entrainment in the highest-entrainment cases.
+On balance, it appears to us that the averaging method we choose better summarizes the behavior of
+ModelE3, namely that the greater magnitude of the entrainment flux with
+increasing \nd{} is consistent with the earlier deepening.
+
+As expected, varying the aerosol concentration strongly affects the droplet
+concentration.  From this response, the two SCMs then diverge in the details of
+their behavior, but they reach the
+same behavioral endpoint at sufficiently large \nd: enhanced entrainment leading to a loss of \lwp{} as \nd{}
+increases.  In ModelE3, \lwp{} after spinup starts
+out with a monotonically increasing \nd{} dependence; after spinup, the
+low-\nd{} runs experience an increase in \lwp, while the high-\nd{} runs
+experience a decrease, leading to a time-average \lwp{} that first increases
+with \nd{} and then decreases (Figs.~\ref{fig:giss-scm-timeseries} and
+\ref{fig:giss-scm-ndeps}).  The increasingly negative \lwp{} tendency as a
+function of \nd{} accompanies an increasingly strong entrainment warming and
+drying (Fig.~\ref{fig:giss-scm-ndeps}).  The increase in entrainment with
+increasing \nd{} competes
+with a decrease in precipitation (Fig.~\ref{fig:giss-scm-timeseries}). ModelE3
+with native longwave radiation, however, maintains three times greater \lwp{} after
+24~h duration (see Appendix).
+
+In E3SM, \lwp{} after spinup has a monotonically
+decreasing relationship with \nd{}, which remains true at each point in time
+throughout the runs.  As all
+runs experience fairly rapid \lwp{} loss with time, time averages only show weak
+dependence on \nd{} (Fig.~\ref{fig:e3sm-scm-ndeps-si}).  We
+can instead quantify susceptibilities by scanning across the different
+aerosol experiments at each time step; this is shown for \lwp{} in
+Fig.~\ref{fig:e3sm-scm-lwpsusc} and for $E$ in Fig.~\ref{fig:e3sm-scm-esusc}.
+Precipitation in E3SM largely ceases after the first time step, even though drizzle was measured in the  DYCOMS-II RF02 observations. 
+In ModelE3 with native LW radiation, precipitation experiences sharp peaks with a periodicity similar to PBL depth increases.
+
+Whether the effect of varying the aerosol concentration on \lwp{} is expected
+depends on our Bayesian prior.  The agreement on $\ralwp<0$ across CMIP5-era
+GCMs \citep{Gryspeerdt2020}, which persists in the newer-generation models
+examined in part 1, and the absence of enhanced entrainment physics in some GCMs
+\citep[e.g.,][]{Salzmann2010} have led to the notion that GCMs may be
+structurally incapable of representing the enhanced entrainment mechanism known
+from LES \citep[e.g.,][]{Zhou2017}.  This thinking is in tension with a long line of parameterization work
+\citep[e.g.,][]{Randall1985,Lock2000,Bretherton2008,Guo2011,Karset2020}
+indicating that it may well be possible to represent this mechanism in
+GCMs, either through direct parameterization or as an emergent behavior.  If our
+expectation is based on the LES-based process understanding, then we would
+predict the causal effect of \nd{} to be a decrease in \lwp{}.  The surprising
+result is that the SCM sides with the LES (see Appendix) rather than the 3D GCM
+with which the SCM shares its model physics.  Recall that the E3SM 3D GCM run,
+in contrast to the E3SM SCM run, showed negligible response of climatological
+\lwp{} to the anthropogenic \nd{} increase (Sect.~\ref{sec:3d-gcm-configuration}).
+
+While the SCM behavior is consistent with our mechanistic understanding of
+entrainment-mediated drying, we need to point out several caveats.  First, the details of what ``entrainment-mediated drying'' entails are different
+in the two models, as discussed above, and we will find in Sec.~\ref{sec:entr-aci-mech-3d} that the
+behavior in the 3D E3SM run is more consistent with the ModelE3 SCM than with the
+E3SM SCM.  Second, the E3SM SCM entrainment fluxes reach the equivalent of
+several centimeters per second entrainment velocity,
+significantly stronger than LES or the ModelE3 SCM produce for this case, and
+stronger than the E3SM 3D run produces for Sc on average.  Third, if the E3SM
+physics had not serendipitously produced very low precipitation rates, the
+decrease in \lwp{} with increasing \nd{} would probably have been overwhelmed by
+the precipitation suppression signal.  None of these caveats negates the finding
+that the GCM physics appears capable of producing entrainment-mediated \lwp{} loss
+qualitatively consistent with LES findings, and significant intermodel diversity
+is to be expected in SCM studies \citep{Zhu2005, Wyant2007}. They do, however, indicate
+that there is ample further process investigation to be performed
+in future work.
+
+We conduct several additional E3SM SCM experiments with perturbed physics.  These
+experiments further test that the causal effect of aerosols on
+\lwp{} in SCM mode not only has the same sign as in LES but proceeds via the same
+physical mechanisms and show that the entrainment-mediated drying can be tuned
+to agree quantitatively with LES.
+%
+\begin{description}
+\item[Sedimentation--entrainment feedback is the source of entrainment
+  enhancement] Size-dependent sedimentation is one of the processes by which
+  higher-\nd{} clouds lose liquid relative to lower-\nd{} clouds in LES
+  \citep{Bretherton2007} under sufficiently dry overlying air \citep{Ackerman2004}.  The \citet{Gettelman2015a} microphysics parameterizes
+  size-dependent sedimentation.  \citet{Guo2011} showed through process denial experiments that
+  \lwp{} loss only occurs when this process is included in the SCM version of
+  the Geophysical Fluid Dynamics Laboratory (GFDL) AM3 model.  This is true in
+  the E3SM SCM as well; Fig.~\ref{fig:e3sm-scm-lwpsusc-qsed} shows that
+  $\lwpsusc$, which is negative when the size-dependent sedimentation is active,
+  becomes $\approx 0$ when we switch off the
+  sedimentation flux and thus its size dependence.
+\item[Parameter tuning can move the GCMs toward quantitative agreement with LES
+  on susceptibility]
+  The ModelE3 SCM closely replicates LES of the RF02 case
+  (Appendix~\ref{sec:tracing-les-scm}).  While the E3SM SCM behaves significantly
+  differently than LES in that it is nonprecipitating for most of the run, it
+  does appear that its entrainment-mediated \lwp{} susceptibility can be moved
+  closer to LES estimates by appropriate parameter choices.
+  Figure~\ref{fig:e3sm-scm-lwpsusc-qsed} also shows that increasing the
+  size-dependent sedimentation by a factor of 2 makes \lwpsusc{} more negative.
+  Quantitatively, this brings the E3SM SCM closer to quantitative agreement with
+  LES \citep[$-0.35 \leq \lwpsusc \leq -0.22$;][supplementary table
+  1]{Ackerman2004}.  It may be possible to achieve quantitative agreement by
+  combining the sedimentation tuning factor with
+  similar tuning factors in the turbulence parameterization.  This would not be
+  an outlandish model tuning, considering that
+  it may be taking the role of an ``enhancement factor'' \citep{Covert2022}
+  compensating for the coarse vertical discretization $O(100~\text{m})$ compared
+  to the process scale $O(1~\text{m})$.  
+\item[The liquid water path reduction could also have an important shortwave
+  absorption component] The
+  DYCOMS-II RF02 SCM specification calls for a nocturnal simulation, i.e.,
+  without shortwave radiative effects.
+  In the E3SM SCM, we perform a sensitivity test with shortwave radiative
+  effects in which the sun rises at 12 h (not shown); this simulation is less entraining overall, deepening only once,
+  and is only able to sustain its cloud cover for $\approx 18$~h.  During the
+  daytime portion (hours 12--18), this configuration's \lwpsusc{} is more
+  negative than the LW-only simulation's.  Absorption of shortwave at
+  cloud top exerts a warming effect that increases with \nd{} 
+  \citep{Stephens1978,Hoffmann2020}.  The behavior of the SCM run with shortwave
+  radiation is consistent with this \nd-dependent cloud-top heating.
+  Cloud-top heating counteracts longwave cloud-top cooling,
+  reducing the entrainment.  Shortwave heating increases with increasing \nd,
+  decreasing \lwp.
+% \item[Precipitation is not required for reduced liquid water path] In the E3SM SCM,
+%   there is little precipitation, and in the GISS SCM, $\lwpsusc < 0$ 
+%   suppression is 
+\end{description}
+
+\subsection{Entrainment ACI mechanism in 3D model runs}
+\label{sec:entr-aci-mech-3d}
+
+If the entrainment-mediated adjustment of \lwp{} is evident in the SCMs, what becomes
+of it in the full 3D model atmosphere?  From
+\citet{Muelmenstaedt2024a}, we know that $\ralwp < 0$, that is, \lwp{} under
+present-day (PD)
+emissions is greater than \lwp{} under preindustrial (PI) emissions, opposite in sign to what is
+expected from the entrainment-mediated mechanisms and from the SCM.  To understand
+why this happens, we use diagnostics targeted at entrainment mechanisms and
+perform model experiments designed to isolate entrainment mechanisms.
+
+\subsubsection{Indications of entrainment mechanisms in present-day
+  correlations}
+\label{sec:indic-entr-mech}
+
+Figure~\ref{fig:e-nd}a shows cloud-top entrainment into the Sc PBL as a function
+of \nd{} and \lwp{}.  Two things are readily apparent in this figure. First,
+entrainment has a strong dependence on \lwp{}.  Entrainment is expected to
+increase with \lwp{} based on the ability of the cloud to generate turbulence,
+which depends on the availability of liquid water for evaporation and cloud-top
+radiative cooling.  The \lwp{} values at which entrainment turns on are in
+reasonable agreement with recent LES \citep{Hoffmann2020} and observational
+\citep{Zhang2023} results.  \citet{Zhang2023}, reporting on MODIS retrievals,
+state 50~g~m$^{-2}$ as the threshold for efficient radiative cooling.
+\citet{Hoffmann2020}, reporting on LES experiments, are less explicit, but,
+depending on choice of entrainment parameterization and for their
+$\text{LWP}_\infty= 60$~g~m$^{-2}$ simulation, their Fig.~4 shows a sharp
+turn-on that saturates between approximately 20 and 40~g~m$^{-2}$.
+  % This interpretation
+% is supported by Fig.~\ref{fig:delta.F-2d}, showing net radiative cooling $F$ as
+% a function of \lwp.
+
+Second, at a given \lwp, entrainment increases with \nd.
+This is shown quantitatively in Fig.~\ref{fig:e-dldt-susc}: in all
+three Sc regions (see Sect.~\ref{sec:cloud-selection}), the entrainment susceptibility $\esusc{}|_\lwp > 0$ except at
+low \lwp, and the cloud water loss increases (the Eulerian tendency \lwptend{}
+becomes more negative) with increasing \nd. 
+
+The main conclusion from these plots is that the model produces greater
+entrainment in response to higher \nd{} in Sc clouds with high
+enough \lwp{} to support strong entrainment. In
+other words, there appears to be mechanistic agreement between the model
+physics and process understanding of \ralwp{} via entrainment enhanced
+by increased droplet number.  Further support for this conclusion comes from the
+instantaneous \lwp{} tendency $\partial \lwp/\partial t$.  The regression slope
+$\partial^2\lwp/\partial\nd\partial t|_\lwp$ is predominantly negative except at
+low \lwp.  In other words, clouds with a positive entrainment susceptibility also exhibit a
+negative liquid-water tendency, the magnitude of which increases with \nd{}, confirming
+that there is a relationship between entrainment susceptibility and cloud water
+loss (presumably to drying).
+
+There is reason to be cautious, however.  We have tested whether the known negative
+\nd{}--\lwp{} correlation occurs in conjunction with positive
+\nd{}--$E$ and negative \nd{}--$\partial \lwp/\partial t$ correlations,
+consistent with an entrainment drying adjustment to an \nd{} increase.  This
+peels away one layer of confounding between \nd{} and \lwp{}, increasing our
+confidence that there is a mechanistic link between \nd, $E$, and \lwp.
+However, it is possible that the relationships of $E$ and $\partial
+\lwp/\partial t$ with \nd{} are themselves confounded, just as the regression between \nd{} and \lwp{} was found to be
+a result of covariability by \citet{Muelmenstaedt2024a}. 
+
+% Quantitatively, the
+% regression entrainment susceptibility reaches values several times greater than
+% the causal susceptibility in the DYCOMS-II E3SM SCM runs.  At the same time, the
+% entrainment flux itself is closer to expected subsidence Sc values than the
+% DYCOMS-II E3SM SCM values.  In both of these respects, the E3SM 3D atmosphere behaves more like the ModelE3
+% SCM than like the E3SM SCM.  Furthermore, the entrainment susceptibility in the
+% 3D runs is only weakly sensitive to scaling the size-dependent sedimentation
+% (not shown),
+% unlike in the E3SM SCM.  Possible explanations for these differences between the
+% E3SM 3D and SCM behaviors are that the correlation
+% is confounded (see above) or that processes other than the size-dependent
+% sedimentation examined in the SCM also contribute to the entrainment
+% enhancement or the cloud liquid loss.  There is no shortage of further model
+% experimentation (e.g., done as part of a process-denial PPE) that could be done
+% to shed more light on the entrainment behavior of the model.
+
+\subsubsection{Absence of entrainment-mediated adjustment in PI and PD emissions experiments}
+
+In the Sc regime, there are hints of behavior in accordance with
+process understanding \citep[e.g.,][]{Randall1984, Ackerman2004}:
+\lwp{} decreases in response to the anthropogenic \nd{} increase when the relative humidity (RH) in the FT (diagnosed from the first model level above the inversion) is lowest, as shown in
+Fig.~\ref{fig:lwpsusc}.  However, there are multiple reasons these results should be treated with caution
+until they can be confirmed in longer model runs.
+First, the dependence on FT RH is not robust
+across Sc regions. While northeast Pacific (NEP) and southeast
+Pacific (SEP) Sc regions show negative \lwp{} susceptibility to anthropogenic \nd{} at low
+FT RH and positive \lwp{} susceptibility at high FT RH
+(with \lwp{} decrease overall), the southeast Atlantic (SEA) Sc
+region shows no clear pattern.  Furthermore, the NEP and SEP behavior requires
+us to select only the completely overcast (cloud fraction $f=1$, rather than the
+default $f>0.9$ requirement we use elsewhere; this reduces the data sample from
+approximately $3.7\times10^5$ to $1.2\times10^5$ columns). Otherwise, the \lwp{}
+susceptibility has no clear sign or FT RH dependence across regions.
+A final puzzling observation is that the entrainment mass flux, entrainment temperature flux, and
+entrainment moisture flux are all virtually unchanged between PD and PI
+emissions.  On
+balance, the conservative interpretation of these results is that any potential
+\lwp{} reduction signal in response to anthropogenic aerosol is small enough to
+require far longer model runs to detect. 
+
+In the global mean, \lwp{} is virtually unchanged when emissions are changed from PI to
+PD in our E3SM configuration with deactivated precipitation suppression.  (The reader may recall from Sect.~\ref{sec:3d-gcm-configuration} that the global-mean
+warm, overcast cloud $\Delta\log\lwp = \Sexpr{aer.noprecsup.lwp.pd.pi}$.)  Thus,
+even if an entrainment-drying ACI mechanism is represented in the model (as
+the evidence from the SCM experiments in Sect.~\ref{sec:entr-aci-mech-scm} and
+the PD statistics in Sect.~\ref{sec:indic-entr-mech} suggests), the
+model considers that mechanism's global effect to be negligible.  
+
+One possible explanation why the positive susceptibility of $E$ to \nd{} seen in
+PD internal variability does
+not lead to a decrease in \lwp{} is that entrainment susceptibility may beget
+its own demise \citep{Zhu2005,Wood2012}.  (We reiterate, as throughout, that
+another possible explanation for relationships seen in internal variability is
+confounding.)  It is true that $E$ appears to increase with \nd{} at a given
+\lwp{} (Fig.~\ref{fig:e-nd}a).  However, \lwp{} is not fixed during the temporal evolution of a cloud;
+as long as the cloud remains surface-coupled, closed-cell Sc, increased
+entrainment leads to loss of \lwp.  But at lower \lwp, entrainment is
+weaker.  Eventually, entrainment may even decrease \lwp{} to a low enough value
+that the cloud is protected from further entrainment drying \citep{Hoffmann2020,
+Zhang2022}.  Cloud aggregate statistics are consistent with this interpretation, where the $E$
+susceptibility to \nd{} at fixed \lwp{} is positive (Fig.~\ref{fig:e-nd}a), but
+the overall susceptibility of $E$ on \nd{} still becomes negative at
+sufficiently high \nd{} (Fig.~\ref{fig:e-nd}b) due to the strong negative
+correlation between \lwp{} and \nd.  
+If such a negative
+feedback mechanism is at play, it would be an example of buffering in the cloud
+system \citep{Stevens2009}: an initial cloud loss process being shut off by the
+change in cloud state due to that process.
+ 
+% If there is actually a causal feedback mechanism behind this 
+
+% for the lack of a \lwp{} adjustment buffering of the
+% cloud system against perturbations \citep{Stevens2009}.  If a negative feedback
+% on \lwp{} is built into the cloud physics, \lwp{} will be buffered against
+% perturbations.  In our case, the negative feedback loop is as follows: The
+% initial response to an increase in \nd{}, in clouds with sufficient \lwp{} to
+% sustain cloud top radiative cooling, appears to be an increase in entrainment,
+% which leads to a decrease in \lwp.  But this decrease in \lwp{} pushes clouds
+% out of the entrainment-susceptible regime and into a low-\lwp{}, low-entrainment
+% regime that shields them from further \lwp{} loss.  Thus, it is natural to
+% expect buffering not only in the full tangle of multiscale cloud processes found
+% in real clouds, where it is a well known concept \citep{Stevens2009}, but also
+% in the and the parameterized representation of clouds in a GCM.
+
+%% \subsection{An emergent constraint on cloud adjustments?}
+
+\section{Discussion, conclusions, and recommendations}
+
+We have documented two surprising behaviors from GCMs.  The first is that GCMs can produce negative \nd--\lwp{}
+PD correlations that do not predict \ralwp{} \citep{Muelmenstaedt2024a}.  In terms of mechanistic
+understanding, the simplest explanation is that the correlation is due to
+confounding rather than a causal relationship
+involving the entrainment-mediated mechanisms suggested by process scale
+modeling.
+
+This is where models had a second surprise in store: there is actually a
+causal negative relationship between aerosol and \lwp.  The evidence for this
+causal relationship comes from SCM studies, where, like \citet{Guo2011}, we find
+that increased aerosol, while holding all other boundary conditions fixed, leads
+to liquid-water loss at sufficiently high \nd.  Furthermore, this loss appears
+to be due to increased entrainment, or at least it occurs in conjunction with
+increased entrainment when the aerosol boundary condition is increased.  
+At face value, this would seem to indicate excellent mechanistic agreement with
+LES-based process understanding
+that enhanced entrainment drying reduces \lwp.  Three-dimensional atmosphere
+runs, too, show evidence for entrainment-mediated liquid-water loss in
+correlations between entrainment and \nd.
+
+\temporary{reminder: look at \citet{Lock2004}, https://doi.org/10.1256/qj.03.114}
+
+However, like \citet{Karset2020}, we find that a secular \nd{} increase caused by anthropogenic emissions 
+leads, at best, to a very weak decrease in \lwp{}, unlike what would be expected from the SCM idealized case study 
+or the relationships found in PD internal variability (increased $E$,
+increasingly negative $\partial\lwp/\partial t$ when \nd{} increases).  This may
+be a manifestation of buffering of the cloud system against perturbations; a
+candidate for the buffering mechanism is that enhanced entrainment leads to
+sufficient liquid-water loss to shut off entrainment driven by cloud-top radiative
+cooling, protecting the clouds from further liquid loss.
+
+Summarizing the findings from parts 1 and 2 of this manuscript series, we come to the following
+conclusions.  First, negative relationships between \nd{} and \lwp{} observed in
+PD internal variability are not necessarily indicative of a causal reduction in
+\lwp{}, and thus not necessarily predictive of decreased \lwp{} when \nd{}
+increases due to anthropogenic emissions in GCMs.  Second, causal negative relationships
+between \nd{} and \lwp{} in LES are not necessarily representative of 
+the more diverse ensemble of clouds in the global-mean \ralwp.  Thus, the disagreement on the sign of \ralwp{} between
+global models and other lines of evidence \citep{Bellouin2020} may not be solely
+due to a deficiency in the GCM physics; it could also be due to known deficiencies in
+the other lines of evidence.
+
+Casting doubt on whether we even know the sign of \ralwp{} is a highly
+unsatisfactory state of affairs.  Answering the following six questions would
+provide a potential remedy:
+%
+\begin{description}
+\item[What complexity is required?] Many different processes are at play, and
+  it is not clear which ones are represented in the models studied here, either
+  through parameterization or emerging from the interplay of physics and dynamics.
+  There is certainly value in (and models are suited to) studying how the
+  climate response depends on the processes included the model.
+  But trying to include all known or hypothesized processes could fall into the trap of amassing a zoo of
+  ``$n$th indirect effects'' \citep{Stevens2009,Muelmenstaedt2018}.  Instead of
+  overelaborating the model with redundant and competing parameterizations
+  \citep{Proske2023}, the approach leading to the lowest climate projection
+  uncertainty may lie in finding the minimal set of parameterizations that allow
+  the model to reproduce physical process understanding of the sensitivities that matter for
+  the climate problem: sensitivities to those boundary conditions that change with aerosol and greenhouse-gas
+  ERF or with global warming.  Evident qualitative differences in the
+  E3SM and ModelE3 SCM behaviors compared with one LES and the challenges of well-constraining LES
+  with observations are reminders that the representation of basic
+  microphysical and turbulent processes still afford ample opportunity for
+  tighter constraint.
+\item[What resolution is required?] GCM resolution can offer, at best, a cartoon version of the mechanisms at
+  play in real clouds.  But ``cartoon'' does not have to be a pejorative; it is the simplest
+  representation of reality that can convey the author's intent (wit, satire, heuristic simplification,
+  or, when applied metaphorically to models, predictive skill for a different
+  climate state).  As noted in the previous paragraph, there is value in
+  simplicity.  There is a trade-off between resolution and simplicity, however:
+  the coarser the resolution, the greater the reliance on the parameterized
+  physics, and the longer the list of phenomena that need to be parameterized.
+  Can the climate effect of entrainment be adequately captured by ``bulk''
+  entrainment throughout the GCM grid box, or is the mesoscale variability, in
+  the form of the cloud-top circulation engulfing free-tropospheric air
+  \citep[e.g.,][]{Yamaguchi2012,Zhou2019}, essential for a correct projection of
+  the entrainment response to anthropogenic perturbations? (And, in that case,
+  are km-scale ``storm-resolving'' global models able to represent these features by
+  beginning to resolve the mesoscale dynamics of large Sc cells?)
+   How far this trade-off between resolution and parameterization can be pushed determines the minimal
+  resolution required for reliable climate projections.   \citet{Terai2020}
+  and other studies already provide hints at the answer.  An important additional piece
+  of information that can be obtained from the entrainment diagnostics presented
+  here is how entrainment behavior changes, qualitatively and quantitatively, as
+  model resolution is coarsened from LES \citep[or, ideally, direct
+  numerical simulation of the cloud-top turbulence;][]{Mellado2018}
+  to global storm-resolving models to 10--100~km-scale GCMs.
+\item[How do base-state and process errors affect modeled climate responses?]
+  Our results show that entrainment and its susceptibility are strong functions
+  of \lwp{} and \nd.  The climate response may also be a function of the model's
+  FT RH, which appears biased high in E3SMv2.
+  Dependence on base state \citep{Christensen2023,Varble2023} and competing
+  processes \citep{Muelmenstaedt2020,Muelmenstaedt2021} in models necessitates careful
+  evaluation of the base state \nd{} and \lwp{}, paying close attention to
+  issues of definition and aggregation
+  \citep{Elsaesser2017,Feingold2022,Varble2023}.  Better constraints on
+  the base state alone can run into ``equifinality''
+  \citep{Bertalanffy1950,Beven2001,Lee2016,Regayre2018,Muelmenstaedt2018} problems that negate a
+  direct reduction in climate projection uncertainty
+  \citep{Lee2016,Regayre2018,Muelmenstaedt2020,Muelmenstaedt2021,Zelinka2022}.
+  In the case of entrainment, however, the apparent
+  strong dependence of the process representation on base-state errors may yield a significant
+  payoff in tighter 
+  constraints on climate projections when the base state is improved.
+\item[What observational constraints on the entrainment process are available?]
+  Along with vital advances in teasing causality out of observations of
+  cloud \nd{} and \lwp{} \citep{Fons2023}, the biggest step forward along the
+  observational track would be better constraints on the entrainment process
+  itself.  One possibility may be to diagnose subadiabaticity
+  \citep{Merk2016,Varble2023} as an indicator of the cloud liquid loss.  This
+  would only provide a time-integrated measure of the loss processes, and as
+  such would require disentangling entrainment drying from precipitation.
+\item[How representative are susceptibilities derived in small ensembles of
+  individual cases?] Given the difficulty of placing observational constraints
+  on entrainment, the most convincing evidence for entrainment-mediated \ralwp{}
+  continues to come from LES studies.  Large ensembles of LES cases
+  \citep[e.g.,][]{Gustafson2020,Glassmeier2019} are vital to provide resilience
+  against the possibility that the well-studied, often idealized canonical
+  subsidence Sc conditions may not be representative of the global-mean role
+  that cloud-top entrainment plays in ERFaci.  These LES ensembles will be
+  particularly valuable if they span
+  the initial-value and boundary-value problem aspects of the climate response
+  (i.e., sample the vast variability of meteorology encountered by Sc
+  clouds in the climate), and if they provide cloud lifecycle evolution \citep{Kazil2021}
+  that can be validated against cloud lifecycle observations \citep{Christensen2020}
+  sufficiently to ensure LES adequacy for purpose, given differing results in
+  multi-LES studies \citep[e.g.,][]{Ackerman2009}.  The same point on the
+  importance of large ensembles holds for SCM studies: the differences between
+  E3SM and ModelE SCM of the DYCOMS-II RF02 case, as well as the differences
+  between the high-entrainment E3SM SCM and moderate-entrainment E3SM 3D runs,
+  illustrate the need for a set of SCM test cases that better approximate the
+  diversity of meteorological conditions encountered in the climate.  A way
+  forward would be to perform the suite of SCM causal aerosol perturbation
+  experiments and mechanism denial experiments from
+  Sect.~\ref{sec:entr-aci-mech-scm} on an ensemble of single-column cloud
+  cases from a 3D run using the SCM ability to ``replay'' the forcing of the
+  column by the 3D atmosphere \citep{Bogenschutz2020}.
+\item[Was precipitation suppression the bigger problem all along?] According to our results, and consistent with \citet{Karset2020},
+  cloud-top entrainment, even when represented in the model physics, only appears to play a small role in the global-mean \ralwp.  If
+  this GCM finding reflects reality, focusing on the precipitation-mediated
+  component of \ralwp{} takes on renewed importance.
+\end{description}
+
+Recognizing that the ACI climate problem is at its core a multiscale physics
+  problem is crucial, as is recognizing that no single line of evidence is capable of putting our knowledge
+of \ralwp{} on solid footing \citep{Muelmenstaedt2018}.  The above research
+questions are a sketch of a multiscale modeling and observations roadmap.
+Simultaneously, by accounting for the multiscale nature of the problem, they would put us on a path of
+reliable climate projections beyond the global energy budget (e.g., projecting
+regional hydrologic extremes due to the spatial heterogeneity of ERFaci) by ensuring that global modeling systems
+correctly represent both the spatial pattern of ERF and the response of the circulation at all scales to this forcing \citep{Muelmenstaedt2021b}.
+
+% These mechanisms are represented and active in models and contribute to the
+% negative \nd{}--\lwp{} correlation, so the correlation is actually partially
+% causal.  However, the entrainment mechanisms are neither the dominant \lwp{}
+% adjustment mechanism nor the dominant contributor to the negative correlation.
+
+% From PPE: Need to look beyond a categorical understanding (negative correlation
+% means negative adjustment) and treat it as a quantitative problem instead: part
+% of the correlation is confounding, part is causal.  A negative correlation by
+% itself doesn't guarantee negative adjustment, but if the correlation is negative
+% enough, then the adjustment is probably also negative.  This means that being
+% able to estimate the confounding contribution to the correlation becomes crucial
+% to extracting adjustment from the observed relationship.
+
+\appendix
+\section{Tracing DYCOMS-II RF02 model behavior from LES to SCM}
+\label{sec:tracing-les-scm}
+
+% \aacomment{Johannes, it would be good to confirm that you are using only my
+%   results without nudging, which you can check by inspecting that the profiles
+%   dq\_nudge (and dth\_nudge) never depart from zero.} \jmcomment{checked\dots{}
+%   the files don't contain those fields, but they have ``nudge0'' in the name.}
+
+% \aacomment{So I'm (unsurprisingly) slower than I'd hoped, as I so easily get bogged down in minutiae. I've just finished drafting the appendix, which
+% is attached, as is my crude figure. The materials used to produce the figure can be grabbed from here, in which the contents should be obvious from the filenames. I've also included the IDL script I used to make the figure, in case it might be of use.
+% Note that I'm no longer nudging anything, in either the LES or SCM, which is consistent with the A009 specification.}
+
+The SCM setup here is based on the \citet{Ackerman2009} intercomparison of LESs,
+which is in turn based on airborne observations of a nocturnal marine Sc deck
+during the DYCOMS-II project \citep{Stevens2003, vanZanten2005} following
+an approximate Lagrangian trajectory over 5 hours \citep[to paraphrase the
+description of][]{Wyant2007}. The purpose of this appendix is to connect LES of
+the case to the SCM setups and results in this study. 
+
+A representative LES in that study was the Distributed Hydrodynamic Aerosol and Radiative Modeling Application (DHARMA) model, here run with two-moment cloud
+microphysics \citep{Tornow2021}, and with a vertical grid spacing of $\delta z =
+5$~m to 200~m 
+above the original inversion to avoid a positive feedback between entrainment
+and grid spacing that arises on the \citet{Ackerman2009} specified grid, which was designed to accomodate
+simulations of duration 6 h instead of the 24 h used here.
+
+The ModelE3 SCM is run here following the specifications of \citet{Ackerman2009}, with one departure
+being that aerosol are treated as a monomodal lognormal distribution with a fixed number
+mixing ratio (corresponding to 60 cm$^{-3}$ at 900 hPa and 10\textdegree C) instead of the bimodal size
+distribution specified by \citet{Ackerman2009}, which produces comparable \nd{} values to the LES, as seen
+in Fig.~\ref{fig:les-scm-timeseries}.
+
+The LES and ModelE3 SCM model setups also both depart from the \citet{Ackerman2009} specificaton of
+cloud-water sedimention and instead use the treatment in their (similar) native microphysics
+schemes of cloud water sedimentation [assuming a gamma distribution with a relative dispersion
+of 0.3, per \citet{Geoffroy2010} in the SCM, and with a relative dispersion of 0.2 in the LES].
+
+Given that this case was used for the development and default tuning of the ModelE3 SCM, it
+is not a surprise that the SCM results match the LES reasonably well, with the greatest
+differences being (1) modestly slower entrainment and, thus, deepening of the marine boundary
+layer (MBL) in the SCM, and (2) about a factor of two less drizzle reaching the surface for most
+of the duration. 
+While the formulations of the SCM and LES are different, and such differences are to be 
+expected, we note that a narrowing of the assumed droplet size distribution to match that
+in the LES has little impact and does not deepen the MBL more over the 24-h duration
+(not shown). We also note that the stronger drizzle for the LES is not explained by its
+assumption of a narrower raindrop size distribution, which on its own would instead be expected
+to result in weaker drizzle at the surface.
+
+As briefly noted in the main text, the SCM setup used for the E3SM further departs from the \citet{Ackerman2009}
+specification and the ModelE3 SCM setup here in a number of ways, among them: (1) it did not use
+the specified surface stress, (2) it did not adopt the specified Beer's Law parameterization of
+longwave flux divergence, and (3) it did not apply the local subsidence rate to vertical
+gradients using first-order upwinding to avoid complications with divergent flow, but instead
+treated the specified divergence using the dynamic core. While we are unable to even begin
+to match departure (3), we are able to consider departures (1) and (2) with the ModelE3 SCM.
+For (1), we adopted the equilibrated surface stress from the E3SM results, which has has very
+little impact on the results (not shown). For (2) we used the ModelE3 native longwave radiation
+scheme, using the ModelE3 SCM standard machinery to patch in the McClatchey (1972) standard atmosphere
+above the 1.5-km top of the initial sounding provided by \citet{Ackerman2009}. As seen in Fig.~\ref{fig:les-scm-timeseries}, doing so results
+in appreciably faster entrainment, which better matches the E3SM SCM results (Fig. 2), which
+also deepens by about 350 m over the 24-h duration.
+
+The inverted-v relationship between \lwp{} and \nd{} is evident in the LES and ModelE3 SCM results (Fig.~\ref{fig:les-scm-nd-lwp}).
+The match to the LES results is not a surprise for the default tuning, as such a comparison was
+considered in the ModelE3 model development phase. However, the decent match of Tun1, a product of
+the machine-learning tuning of the parent GCM, results partly from skill, in limiting the range
+of parameters that the machine learning explored, and partly from luck, as some parameter combinations
+devised by the machine learning did not result in such a good match to the LES result in these terms
+(not shown).
+
+\noappendix
+
+\codedataavailability{Following acceptance, the analysis code and model output will be released with
+  a code and data DOI} %% use this section when having only software code available
+
+
+% \sampleavailability{TEXT} %% use this section when having geoscientific samples available
+
+
+% \videosupplement{TEXT} %% use this section when having video supplements available
+
+
+\authorcontribution{All authors contributed to the experiment design, model
+  runs, data analysis, or manuscript writing.} %% this section is mandatory
+
+\competinginterests{At least one of the (co-)authors is a member of the editorial board of Atmospheric Chemistry and Physics.} %% this section is mandatory even if you declare that no competing interests are present
+
+% \disclaimer{TEXT} %% optional section
+
+\begin{acknowledgements}
+  Bjorn Stevens's suggestion to use budget equations to characterize models'
+  entrainment behavior provided the spark for this work.
+  We thank Christopher Bretherton, Yao-Sheng Chen, Leo Donner,
+  Graham Feingold, Tom Goren, Ed Gryspeerdt, Peter Kalmus, Jan Kazil, Adrian
+  Lock, Roger Marchand, 
+  Daniel McCoy, Isabel McCoy, Roberto Mechoso, Brian Medeiros, Juan-Pedro
+  Mellado, Yi Ming, Prasanth Prabhakaran, Phil Rasch, Christina Sackmann, Yunpeng Shan, Philip
+  Stier, Shuaiqi Tang, Jo\~ao
+  Teixeira, Chris Terai, Yoko Tsushima, Hui Wan, Rob Wood, Heng Xiao, Tak Yamaguchi, Mark Zelinka, Jianhao Zhang, 
+  Xiaoli Zhou, and four reviewers for comments and discussion.  This work arises from the 2020
+  U.S.~Climate Modeling Summit held virtually and chaired by Gavin Schmidt and
+  Susanne Bauer.  JM was supported by Office of Science,
+  U.S.~Department of Energy (DOE) Biological and Environmental Research as part
+  of the Earth System Model Development (ESMD) program area and used resources of the
+  National Energy Research Scientific Computing Center (NERSC), a U.S.~DOE
+  Office of Science User Facility located at Lawrence Berkeley National
+  Laboratory, operated under contract DE-AC02-05CH11231.  The entrainment
+  diagnostics were developed under the EAGLES project funded by the U.S.~DOE
+  ESMD program area.  ASA, AMF, FT and SEB
+  were supported by the NASA Modeling, Analysis, and Prediction Program and
+  their computational resources were provided by the NASA Center for Climate
+  Simulation (NCCS) at Goddard Space Flight Center.  The Pacific Northwest
+  National Laboratory (PNNL) is operated for DOE by Battelle Memorial Institute
+  under contract DE-AC05-76RLO1830. 
+\end{acknowledgements}
+
+\bibliographystyle{copernicus}
+\bibliography{references-clean}
+
+\clearpage
+
+\begin{figure*}
+  \centering
+  <<pbl-e3sm-zinv, fig.height=8.33/2.54>>=
+  readRDS("../profiles_NEP_entrain.rds") %>%
+      rename_fields() %>%
+      group_by(time, ncol) %>%
+      mutate(jk = 1 : length(lev)) %>%
+      ungroup() %>%
+      calculate_p3d() %>%
+      calculate_thermodynamics() %>%
+      group_by(time, ncol) %>%
+      find_inversion() %>%
+      mutate(h = z3[jk == jk.pbl]) %>%
+      group_by(lev, ncol) %>%
+      filter_invalid_qrad() %>%
+      ungroup() %>%
+      filter_sc() %>%
+      mutate(t = t - 273.15) %>%
+      mutate(omega = omega * 864) %>% ## concert to hPa d^-1
+      mutate(qt = 1e3 * qt,
+             ql = 1e3 * ql) %>% ## convert to g kg^-1
+      ## mutate(skw = wp3_clubb / wp2_clubb^1.5) %>%
+      ## group_by(time) %>%
+      ## mutate(jk.pbl = max(which(diff(t) < 0))) %>%
+      ## ungroup() %>%
+      mutate(delta.k = jk - jk.pbl) %>%
+      filter(delta.k >= -10) %>%
+      gather(xtype, x, t, theta_l, qt, ql, cloud) %>%
+      group_by(time, xtype) %>%
+      mutate(delta.x = x - ifelse(xtype %in% c("ccn", "numliq", "numliq_ic", "ql_ic", "t", "ql", "omega", "theta_e", "wp2_clubb", "wp3_clubb", "cloud", "cloudfrac_clubb", "qrl", "qrs", "skw", "prao", "prco"), 0, mean(x[delta.k > 2], na.rm = TRUE))) %>%
+      ungroup() %>%
+      mutate(xtype = revalue(xtype, c(t = "$T$ (\\textdegree C)",
+                                      qv = "$\\Delta q\\ (\\text{kg kg}^{-1})$",
+                                      ql = "$\\ql\\ (\\text{g kg}^{-1})$",
+                                      ql_ic = "$\\ql\\text{ (in cloud)}\\ (\\text{kg kg}^{-1})$",
+                                      qn_ic = "$q_N/f\\ (\\text{kg kg}^{-1})$",
+                                      qt = "$\\Delta \\qt\\ (\\text{g kg}^{-1})$",
+                                      omega = "$\\omega$ (hPa d$^{-1}$)",
+                                      theta = "$\\Delta \\theta\\ (\\text{K})$",
+                                      theta_l = "$\\Delta \\thetal\\ (\\text{K})$",
+                                      theta_e = "$\\theta_e\\ (\\text{K})$",
+                                      aclcac = "$f$",
+                                      cloud = "$f$",
+                                      cloudfrac_clubb = "$f_\\text{CLUBB}$",
+                                      numliq = "$\\nd$ (grid-mean)",
+                                      numliq_ic = "$\\nd$",
+                                      adv.xl = "${\\bf v}\\cdot\\nabla \\ql$",
+                                      adv.q = "${\\bf v}\\cdot\\nabla q$",
+                                      wp2_clubb = "$\\overline{w'^2}\\ (\\text{m}^2\\ \\text{s}^{-2})$",
+                                      wp3_clubb = "$\\overline{w'^3}\\ (\\text{m}^3\\ \\text{s}^{-3})$",
+                                      skw = "Sk$_w$"))) %>%
+      mutate(jk.pbl = 72 - jk.pbl) %>% ## cut(72 - jk.pbl, c(0,5,10,20,30,40,80), right = FALSE)) %>%
+      filter(jk.pbl < 18, jk.pbl >= 4, jk.pbl %% 2 == 0) %>%
+      group_by(xtype, delta.k, jk.pbl) %>%
+      ## ## summarize(q25 = quantile(x, 0.25), q50 = quantile(x, 0.5), q75 = quantile(x, 0.75)) %>%
+      summarize(q50 = mean(delta.x, na.rm = TRUE), q25 = mean(delta.x) - 2 * sd(delta.x), q75 = mean(delta.x) + 2 * sd(delta.x), n = n()) %>%
+      ungroup() %>%
+      filter(!is.na(q50)) %>%
+      ggplot(aes(# y = n,
+          y = ifelse(n > 0, q50, NA),
+          x = delta.k,
+          ## x =  delta.k, y = delta.x,
+          ## group = time,
+          ## k.norm, ##
+          ## x = p.norm,
+          ## x = delta.p * 1e-2,
+          ## col = p.pbl,
+          col = factor(jk.pbl), 
+          fill = factor(jk.pbl))) +
+      ## scale_color_distiller(palette = "Spectral") +
+      scale_y_continuous(labels = tikz_sanitize_sparse ) +
+      scale_color_discrete("$k_\\text{sfc} - k_\\text{pbl}$"## , palette = "Spectral"
+                           ) +
+      scale_fill_discrete("$k_\\text{sfc} - k_\\text{pbl}$") +
+      ## scale_fill_brewer("$k_\\text{sfc} - k_\\text{pbl}$", palette = "Spectral") +
+      ## guides(color = guide_legend("$k_\\text{pbl}$", override.aes = list(lwd = 1, alpha = 1))) +
+      geom_line(lwd = 1) +
+      ## geom_ribbon(aes(ymin = q25, ymax = q75, col = NULL), alpha = 0.1) +
+      facet_wrap(~ xtype, scales = "free_x", nrow = 1, switch = "x") +
+      ## coord_flip(xlim = c(-2.5, 1)) +
+      coord_flip(xlim = c(16, -8)## , ylim = 5e-2 * c(-1, 1)
+                 ) +
+      ## scale_x_reverse() +
+      labs(x = "$k - k_\\text{pbl}$", y = "") + ## , y = "kg kg$^{-1}$ d$^{-1}$") +
+      geom_hline(yintercept = 0, lty = "dashed", col = "grey") +
+      geom_vline(xintercept = 0, lty = "dashed", col = "grey") +
+      theme(legend.position = c(0.11, 0.32),
+            axis.title.x = element_blank(),
+            strip.placement = "outside", strip.background.x = element_blank())
+  @
+  \caption{Composite vertical profiles in E3SM Sc conditions as defined in
+    Sect.~\ref{sec:cloud-selection}.  To enable plotting of a cloud cover
+    profile, the $f>0.9$ requirement is not
+    applied.  Model-level differences are used as the vertical coordinate to avoid artificially smearing
+    out the vertical gradients through remapping to a pressure or geometric
+    height coordinate; model thickness varies with height and surface pressure
+    but averages approximately 80~m in the profiles shown.  The lowest level
+    in the column at which the temperature increases with altitude is identified
+    as the PBL top, with corresponding level number $k_\text{pbl}$.  The
+    vertical coordinate is model level referenced to PBL top, $k - k_\text{pbl}$
+    (positive downward).  Profiles are stratified by PBL depth, measured as the
+    difference between the PBL-top model level and the lowermost model level
+    $k_\text{sfc}$.  (In E3SMv2, $k_\text{sfc}=72$.)  Profiles of $\qt$ and
+    $\thetal$ are shown as differences $\Delta \qt$ and $\Delta \thetal$ with
+    respect to the mass-weighted vertical mean over the PBL.}
+  \label{fig:pbl-profiles}
+\end{figure*}
+
+\begin{figure}
+  \centering
+  <<entrainment-scatterplot, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  g.entrain.scatterplot <- df.entrain.aer.noprecsup.golden %>%
+      filter(precc == 0) %>%
+      mutate(period = aer) %>%
+      filter(period == "PD") %>%
+      filter(sed == 1) %>%
+      mutate(exp = sed) %>%
+      ## filter(time > "2010-01-01", time < "2011-01-01") %>%
+      calculate_incloud() %>%
+      calculate_fluxes() %>%
+      convert_omega() %>%
+      filter(between(E_q, -0.05, 0.05),
+             between(E_theta, -0.05, 0.05)) %>%
+      entrainment.scatterplot(marginal = TRUE)
+
+  g.entrain.scatterplot[[1]] <- g.entrain.scatterplot[[1]] +
+      theme(plot.margin = margin(6,0,0,0))
+  g.entrain.scatterplot[[2]] <- g.entrain.scatterplot[[2]] +
+      theme(plot.margin = margin(0,0,0,0))
+  g.entrain.scatterplot[[4]] <- g.entrain.scatterplot[[4]] +
+      theme(plot.margin = margin(0,6,0,0))
+
+  print(g.entrain.scatterplot)
+  @
+  \caption{Physical consistency checks on $E_q$ and $E_\theta$.  The central
+    panel shows the joint
+    probability density $P(E_q,E_\theta)$, along with a LOESS-smoothed
+    mean $E_q$ as a function of $E_\theta$ (blue line) and dashed gray 1:1
+    line.  The outer panels show the marginal cumulative distributions of $E_q$
+    and $E_\theta$.}
+  \label{fig:entrainment-scatter}
+\end{figure}
+
+\begin{figure*}
+  \centering
+  <<entrainment-controls>>=
+  df.entrain.aer.noprecsup.golden %>%
+    filter(precc == 0) %>%
+      mutate(period = aer) %>%
+      filter(period == "PD") %>%
+      filter(sed == 1) %>%
+      mutate(exp = sed) %>%
+      calculate_fluxes() %>%
+      convert_omega() %>%
+      mutate(log10.delta.R = log10(delta.R)) %>%
+      mutate(E = E_q) %>%
+      filter(lcc > 0.9, icc == 0, ttop > 273) %>% ## delta.theta > 5) %>%
+      group_by(period##, region
+               ) %>%
+      ecf.plot(E.group = "E", ecf.group = c("lh", "sh", "delta.F", "delta.theta", "delta.q", "omega.pbl.hPa.d"), median.line = FALSE, raster = TRUE, lty = period, col = period, quantile.filter = 2e-2) +
+      ## scale_color_brewer(palette = "Dark2") +
+      facet_wrap( ~ ecf, scales = "free_x", switch = "x", nrow = 2) +
+      scale_color_brewer("", palette = "Set1", direction = -1, drop = FALSE) +
+      labs(y = tikz_replacements_unitful()["E"]) +
+      scale_x_continuous() +
+      theme(axis.title.x = element_blank(), ## axis.title.y = element_blank(),
+            strip.placement = "outside", strip.background = element_blank(),
+            strip.switch.pad.wrap = unit(-0.25, "lines")) +
+      guides(fill = "none",
+             linetype = "none",
+             color = "none")
+  @ 
+
+  \caption{Dependence of entrainment on column properties: surface latent and sensible
+    heat flux \text{LH} and \text{SH}, radiative cooling $\Delta F$ (cooling
+    is positive), thermodynamic jumps across the inversion $\Delta\thetal$ and
+    $\Delta \qt$, and pressure vertical velocity at PBL top $\omega_\text{PBL}$.}
+  \label{fig:entrainment-controls}
+\end{figure*}
+
+<<e3sm-scm-aer-scans-setup>>=
+@ 
+<<e3sm-scm-aer-swoff-setup>>=
+@ 
+% <<e3sm-scm-aer-ind3-setup>>=
+% @ 
+% <<giss-scm-ppe-setup>>=
+% @ 
+<<giss-scm-def-setup>>=
+@ 
+
+\begin{figure*}
+  \centering
+  <<giss-ppe-timeseries, fig.height=15/2.54>>=
+  @
+  \caption{GISS ModelE3 SCM time series of PBL height (height of lowest model
+    level with inverted temperature lapse) $h$, cloud cover $f$, mean droplet number
+    \nd, entrainment $E$, liquid water path \lwp, and surface precipitation rate
+    $R$ for  the DYCOMS-II RF02 experiment.  
+    Prescribed aerosol concentration is varied between $\na=20$ and 640~cm$^{-3}$.}
+  \label{fig:giss-scm-timeseries}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  <<e3sm-scm-aer-sed-timeseries-plot, fig.height=15/2.54>>=
+  @ 
+  \caption{E3SM SCM time series for  the DYCOMS-II RF02 setup.  As in
+    Fig.~\ref{fig:giss-scm-timeseries}.  Prescribed aerosol
+    concentration is varied by a factor of 8 above and below its default
+    value. }
+  \label{fig:e3sm-scm-timeseries}
+\end{figure*}
+
+<<e3sm-scm-rename>>=
+@ 
+<<e3sm-scm-means-setup>>=
+@
+<<e3sm-scm-endpoints-setup>>=
+@
+<<e3sm-scm-tendency-setup>>=
+@
+<<e3sm-scm-ndeps-setup>>=
+@
+
+<<giss-scm-means-setup>>=
+@
+<<giss-scm-endpoints-setup>>=
+@
+<<giss-scm-tendency-setup>>=
+@
+<<giss-scm-ndeps-setup>>=
+@
+
+\begin{figure}
+  \centering
+  <<giss-scm-ndeps-plot, fig.width=8.33/2.54, fig.height=19.2/2.54, out.width='8.33cm'>>=
+  @
+  \caption{GISS SCM \nd{} relationships.  State variables are averaged over the
+    time period from 2--12~h; error bars indicate the standard deviation.  The tendency \lwptend{} is
+    calculated by linear regression over overcast conditions ($f > 0.9$) between
+    the end of spinup (2~h) and 12~h; error bars indicate the standard error on
+    the regression slope. In the thermodynamic jumps, we use the shorthand
+    $\hat\theta_\text{l} = \langle\thetal\rangle$ and
+    $\hat{q}_\text{t} = \langle \qt\rangle$.}
+  \label{fig:giss-scm-ndeps}
+\end{figure}
+
+\begin{figure}
+  \centering
+  <<e3sm-scm-aer-sed-lwpsusc-plot, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  @
+  \caption{E3SM SCM \lwpsusc.  Susceptibilities are calculated at every time step
+    from the $\delta\log\lwp$ and $\delta\log\nd$ in the perturbed-aerosol experiment
+    relative to the default-aerosol experiment.  The plot shows the density
+    distribution of \lwpsusc{} over all time steps
+    from the end of the spinup period (2~h) to 12~h, excluding periods when the
+    cloud fraction drops below 0.9.  Horizontal black lines across the density
+    plots indicate the median.}
+  \label{fig:e3sm-scm-lwpsusc}
+\end{figure}
+
+\begin{figure}
+  \centering
+  <<e3sm-scm-aer-sed-esusc-plot, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  @
+  \caption{E3SM SCM \esusc.  As in Fig.~\ref{fig:e3sm-scm-lwpsusc} but showing
+    the susceptibility of cloud-top entrainment.}
+  \label{fig:e3sm-scm-esusc}
+\end{figure}
+
+\begin{figure}
+  \centering
+  <<aer-sed-1e-present-2, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  @
+  \caption{E3SM SCM \lwpsusc{} variation with size-dependent sedimentation.  As in
+    Fig.~\ref{fig:e3sm-scm-lwpsusc} but varying a scale factor applied to the
+    sedimentation flux \qsed{}.}
+  \label{fig:e3sm-scm-lwpsusc-qsed}
+\end{figure}
+
+% \begin{figure}
+%   \centering
+%   <<aer-sed-swoff-1e, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+%   @
+%   \caption{E3SM SCM \lwpsusc{} when only longwave radiative transfer is active.
+%     As in Fig.~\ref{fig:e3sm-scm-lwpsusc} but with shortwave radiative transfer disabled.}
+%   \label{fig:e3sm-scm-lwpsusc-qrs}
+% \end{figure}
+
+% <<giss-scm-susc-setup>>=
+% @
+
+% \begin{figure}
+%   \centering
+%   <<giss-ppe-1e-lwp>>=
+%   @
+%   \caption{GISS SCM PPE LWP susceptibility}
+% \end{figure}
+
+% \begin{figure}
+%   \centering
+%   <<giss-ppe-1e-E>>=
+%   @
+%   \caption{GISS SCM PPE entrainment susceptibility}
+% \end{figure}
+
+% \begin{figure}
+%   \centering
+%   <<giss-ppe-1e-R>>=
+%   @
+%   \caption{GISS SCM PPE precip susceptibility}
+% \end{figure}
+
+\begin{figure*}
+  \centering
+  <<E-nd-v2>>=
+  g.entrain.n.e.v2 <- df.entrain.aer.noprecsup.golden %>%
+      ## filter(precc == 0) %>%
+      mutate(period = aer) %>%
+      filter(period == "PD") %>%
+      filter(sed == 1) %>%
+      mutate(exp = sed) %>%
+    ## filter(time > "2010-01-01", time < "2011-01-01") %>%
+      calculate_incloud() %>%
+      calculate_fluxes() %>%
+      convert_omega() %>%
+      ## mutate(log10.delta.R = log10(delta.R)) %>%
+      ## mutate(discretized_R = 86400 * delta.R) %>% ## m s^-1 --> mm d^-1
+      ## discretize(discretized_R, 4, as_factor = TRUE, equal_contents = TRUE) %>%
+      discretize_lwp(seq(0, 1, 25e-3)) %>%
+      discretize_cdnc(seq(0, 3e8, 25e6)) %>%
+      mutate(E = E_q) %>%
+      mutate(period = factor(period)) %>%
+      filter(region == "NEP") %>%
+      filter(lcc > 0.9, icc == 0, ttop > 273) %>% ## delta.theta > 5) %>%
+      ## filter(E > 0) %>%
+      group_by(exp, period, cdnc_ic, lwp_ic) %>%
+      summarize(n = sum(is.finite(E)),
+                E = median(E, na.rm = TRUE)) %>%
+      ungroup() %>%
+      filter(is.finite(E),
+             n > 25) %>%
+      replace_with_conventional_units() %>%
+      ggplot(aes(cdnc_ic, lwp_ic)) +
+      geom_tile(aes(fill = E)) +
+      geom_density_2d(aes(lwd = ..level..),
+                        data = df.entrain.aer.noprecsup.golden %>%
+                    ## filter(precc == 0) %>%
+                        mutate(period = aer) %>%
+                        filter(period == "PD") %>%
+                        filter(sed == 1) %>%
+                        mutate(exp = sed) %>%
+                        ## filter(time > "2010-01-01", time < "2011-01-01") %>%
+                        calculate_incloud() %>%
+                        calculate_fluxes() %>%
+                        convert_omega() %>%
+                        filter(region == "NEP") %>%
+                        filter(lcc > 0.9, icc == 0, ttop > 273) %>% ## delta.theta > 5) %>%
+                        ## mutate(log10.delta.R = log10(delta.R)) %>%
+                        ## mutate(discretized_R = 86400 * delta.R) %>% ## m s^-1 --> mm d^-1
+                        ## discretize(discretized_R, 4, as_factor = TRUE, equal_contents = TRUE) %>%
+                        filter(is.finite(lwp_ic),
+                               is.finite(cdnc_ic)) %>%
+                        replace_with_conventional_units() 
+                      ## discretize_lwp(seq(0, 1, 25e-3)) %>%
+                      ## discretize_cdnc(seq(0, 3e8, 25e6))
+                      ##  %>%
+                      ## group_by(exp, period, cdnc_ic) %>%
+                      ## summarize(lwp_ic = (mean((lwp_ic), na.rm = TRUE))) %>%
+                      ## ungroup
+                      ) +
+      ## facet_grid(exp ~ period) +
+      scale_x_continuous(labels = NULL) +
+      ## scale_y_log10() +
+      coord_cartesian(xlim = c(0, 175),
+                      ylim = c(0, 250),
+                      expand = FALSE) +
+      scale_linewidth_binned("$P(\\nd,\\lwp)$",
+                             breaks = c(0.5, 1) * 1e-4,
+                             range = c(0.1, 1),
+                             labels = tikz_sanitize) +
+      scale_fill_distiller("$E$ (kg m$^{-2}$ s$^{-1}$)",
+                           palette = "YlOrRd", direction = 1,
+                           limits = c(0e-3, 7.5e-3)) +
+      ## geom_contour(aes(z = E))
+      labs_nd_lwp_conventional()
+
+  g.entrain.v2 <- df.entrain.aer.noprecsup.golden %>%
+      filter(precc == 0) %>%
+      mutate(period = aer) %>%
+      filter(period == "PD") %>%
+      filter(sed == 1) %>%
+      mutate(exp = sed) %>%
+      ## filter(time > "2010-01-01", time < "2011-01-01") %>%
+      calculate_incloud() %>%
+      calculate_fluxes() %>%
+      convert_omega() %>%
+      ## mutate(log10.delta.R = log10(delta.R)) %>%
+      ## mutate(discretized_R = 86400 * delta.R) %>% ## m s^-1 --> mm d^-1
+      ## discretize(discretized_R, 4, as_factor = TRUE, equal_contents = TRUE) %>%
+      discretize_lwp(seq(0, 1, 25e-3)) %>%
+      discretize_cdnc(seq(0, 3e8, 25e6)) %>%
+      mutate(E = E_q) %>%
+      filter(is.finite(E)) %>%
+      filter(between(E, quantile(E, 0.02), quantile(E, 0.98))) %>%
+      mutate(period = factor(period)) %>%
+      filter(region == "NEP") %>%
+      filter(lcc > 0.9, icc == 0, ttop > 273) %>% ## delta.theta > 5) %>%
+      mutate(lwp_ic = E) %>%
+      replace_with_conventional_units() %>%
+      group_by(exp, period, cdnc_ic) %>%
+      filter(n() > 100) %>%
+      summarize(n = n(),
+                se.E = sd(E, na.rm = TRUE) / sqrt(n),
+                E = mean(E, na.rm = TRUE)) %>%
+      ungroup() %>%
+      ggplot(aes(cdnc_ic, E)) +
+      ## lwp.cdnc.conditional(lwp.bins = seq(-0.1, 0.1, length.out = 50 * 2),
+      ##                      cdnc.bins = seq(0, 3e8, 25e6)) %>% ## exp(seq(log(1e6), log(300e6), length.out = 25))) %>%
+      ## filter(count.cdnc > 25) %>%
+      ## lwp.cdnc.plot(marginal = FALSE) +
+      geom_line() + 
+      geom_point() + 
+      geom_linerange(aes(ymin = E - 1.96 * se.E,
+                         ymax = E + 1.96 * se.E)) +
+      scale_x_continuous() +
+      ## scale_y_continuous(breaks = (3:5) * 1e-3) +
+      coord_cartesian(xlim = c(0, 175),
+                      expand = FALSE) +
+      labs(x = tikz_replacements_unitful()["cdnc_ic.conventional"],
+           y = "$E$ (kg m$^{-2}$ s$^{-1}$)") +
+      scale_color_brewer("$R$ (mm d$^{-1})", palette = "Set2")
+  @
+
+  <<E-nd-v2-plot>>=
+  (g.entrain.n.e.v2 +
+   theme(axis.title.x = element_blank())) +
+      g.entrain.v2 +
+      plot_layout(heights = c(2, 1), nrow = 2)
+  @ 
+  \caption{E3SM 3D atmosphere entrainment $E$.  The top panel shows the dependence
+    on \lwp{} and \nd{}; only boxes with $n>25$ points are included.  Contours
+    of the
+    density $P(\nd,\lwp)$ are overlaid.  The bottom panel shows the dependence
+    of $E$ on \nd{} when the \lwp-dependent entrainment $E(\nd,\lwp)$ is
+    integrated over the \lwp{} distribution; error bars indicate the standard
+    error.} 
+  \label{fig:e-nd}
+\end{figure*}
+
+% \begin{figure*}
+%   \centering
+%   <<E-nd-L-lineplot>>=
+%   @ 
+%   \caption{$E(\nd,\lwp)$, but represented as lines for each \lwp{} bin.
+%     \hl{Will probably move to supplemental}}
+%   \label{fig:e-nd-l}
+% \end{figure*}
+
+<<entrain-susc-v2-noprecsup-linear-setup>>=
+@
+
+\begin{figure*}
+  \centering
+  <<entrain-susc-v2-noprecsup-linear>>=
+  bind_rows(df.susc %>%
+            rename(S = S.E,
+                   S.se = S.E.se) %>%
+            mutate(label = "$\\partial\\log E/\\partial\\log \\nd|_\\lwp$"),
+            df.lwp.susc %>%
+            rename(S = S.L,
+                   S.se = S.L.se) %>%
+            mutate(label = "$\\partial^2 \\lwp/\\partial t \\partial\\log \\nd$ (kg~m$^{-2}$~s$^{-1}$)")) %>%
+      filter(period == "PD", exp == "sed1") %>%
+      sc.region.label() %>%
+      replace_with_conventional_units() %>%
+      ggplot(aes(lwp_ic, S, col = region, shape = region)) +
+      geom_point(aes(size = n)) +
+      geom_linerange(aes(ymin = S - 1.96 * S.se,
+                         ymax = S + 1.96 * S.se)) +
+      geom_line() +
+      ## geom_point(aes(x = lwp_ic, y = S.E), df.diff) +
+      scale_size("$n$") +
+      scale_color_discrete("") +
+      scale_shape_discrete("") +
+      coord_cartesian(xlim = c(0, 320), expand = FALSE) + ## ylim = c(-1, 1)) +
+      geom_hline(yintercept = 0, color = "darkgrey", size = 1.5, lty = "dashed") +
+      facet_grid(label ~ ., scales = "free_y", switch = "y") +
+      ggh4x::facetted_pos_scales(y = list(scale_y_continuous(limits = c(-1.1, 1.1)),
+                                          scale_y_continuous(limits = c(-1.1e-5, 1.1e-5)))) +
+      labs(x = tikz_replacements_unitful()["lwp_ic.conventional"],
+           y = "") +
+      theme(legend.direction = "horizontal",
+            legend.position = c(0.375, 0.5)) +
+      theme(axis.title.y = element_blank(),
+            strip.placement = "outside", strip.background.y = element_blank())
+  @
+  \caption{Susceptibility of entrainment and \lwptend{} to \nd.  Susceptibility
+    to \nd{} is calculated as linear regression slope of $\log E$ and \lwptend{}
+    against $\log\nd$ over instantaneous PD statistics within each \lwp{} bin.}  
+  \label{fig:e-dldt-susc}
+\end{figure*}
+
+\begin{figure}
+  <<e3sm-noprecsup-v2-golden-rh, fig.width=8.33/2.54, fig.height=6/2.54, out.width='8.33cm'>>=
+  df.entrain.aer.noprecsup.golden %>%
+      filter(sed == 1) %>%
+      mutate(period = aer) %>%
+      filter(precc == 0) %>%
+      filter(lcc == 1, icc == 0, ttop > 273) %>% ## delta.theta > 5) %>%
+      calculate_incloud() %>%
+      calculate_fluxes() %>%
+      filter_sc() %>%
+      mutate(rh.plus = q_t.plus / qsat(theta_l.plus * (p.pbl / 1e5) ^ (2/7), p.pbl)) %>%
+      filter(rh.plus <= 1, rh.plus >= 0) %>%
+      ## group_by(sed, region) %>%
+      plyr::ddply(~ sed + region, . %>% discretize(rh.plus, 4, equal_contents = TRUE, as_factor = TRUE)) %>%
+      ## mutate(rh.plus = cut(rh.plus, 4, include.lowest = TRUE)) %>% ## , labels = FALSE, dig.lab = 3)) %>%
+      ungroup() %>%
+      (function(df) {
+          df.by.rh <- df %>%
+              group_by(sed, region, period, rh.plus) %>%
+              summarize(lwp = mean(log(lwp_ic), trim = 0.05),
+                        cdnc = mean(log(cdnc_ic), trim = 0.05),
+                        E_theta = mean(E_theta, trim = 0.05),
+                        E_q = mean(E_q, trim = 0.05),
+                        n = n()) %>%
+              ungroup() %>%
+              gather(var, val, lwp : n) %>%
+              spread(period, val) %>%
+              ##    mutate(dlog = PD / PI - 1) %>%
+              mutate(dlog = PD - PI) %>%
+              select(-c(PD, PI)) %>%
+              spread(var, dlog) %>%
+              mutate(S.L = lwp / cdnc)
+          df.by.region <- df %>%
+              group_by(sed, region, period) %>%
+              summarize(lwp = mean(log(lwp_ic), trim = 0.05),
+                        cdnc = mean(log(cdnc_ic), trim = 0.05),
+                        E_theta = mean(E_theta, trim = 0.05),
+                        E_q = mean(E_q, trim = 0.05),
+                        n = n()) %>%
+              ungroup() %>%
+              gather(var, val, lwp : n) %>%
+              spread(period, val) %>%
+              ##    mutate(dlog = PD / PI - 1) %>%
+              mutate(dlog = PD - PI) %>%
+              select(-c(PD, PI)) %>%
+              spread(var, dlog) %>%
+              mutate(S.L = lwp / cdnc) %>%
+              mutate(rh.plus = "all")
+          bind_rows(df.by.rh, df.by.region)
+      }) %>%
+      mutate(rh.min = ifelse(rh.plus == "all", 0,
+                             as.numeric(gsub("\\(([0-9\\.]*),.*]", "\\1", rh.plus))),
+             rh.max = ifelse(rh.plus == "all", 1,
+                             as.numeric(gsub("\\([^,]*,([0-9.]*)]", "\\1", rh.plus)))) %>%
+      sc.region.label() %>%
+      ggplot(aes(xmin = rh.min, xmax = rh.max, x = 0.5 * (rh.min + rh.max), y = S.L, col = region)) +
+      geom_pointrange(aes(lty = rh.plus == "all", size = rh.plus == "all", lwd = rh.plus == "all")) +
+      scale_size_manual("", values = c(0.2, -1)) +
+      scale_linetype_manual("", values = c("solid", "dotted")) +
+      scale_linewidth_manual("", values = c(0.5, 1)) +
+      scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+      geom_hline(yintercept = 0, color = "darkgrey", lwd = 1, lty = "dashed") +
+      facet_grid(. ~ region) +
+      labs(x = "Free-tropospheric relative humidity", y = "$d\\log \\lwp/d\\log \\nd$") +
+      theme(legend.position = "none")
+  
+      ## transmute(Region = region,
+      ##           "\\rhft" = rh.plus,
+      ##           ## "\\nd" = cdnc,
+      ##           ## "\\lwp" = lwp,
+      ##           "$\\Delta\\log\\lwp/\\Delta\\log\\nd$" = S.L) %>%
+      ## xtable::xtable() %>% ## display = c("s", "s", "s", "s", "f", "g", "d")) %>%
+      ## print(sanitize.colnames.function = identity,
+      ##       sanitize.text.function = identity,
+      ##       latex.environments = "center",
+      ##       floating = FALSE,
+      ##       math.style.negative = TRUE,
+      ##       math.style.exponents = TRUE,
+      ##       include.rownames = FALSE,
+      ##       format.args = list(flag = "#"),
+      ##       hline.after = c(rep(-1, 2), 0, 4, 8, rep(nrow(.), 2)))    
+  @
+  \caption{E3SM 3D atmosphere $d\log \lwp/d\log \nd$ stratified by free-tropospheric
+    relative humidity quartiles.  The susceptibility is calculated from the
+    differences $\Delta\log\lwp$ and $\Delta\log\nd$ between PD and PI emissions
+    runs averaged over each RH bin in each Sc region.  Dashed lines indicate the
+    regional Sc $d\log \lwp/d\log \nd$ mean integrated over
+    free-tropospheric relative humidity.}
+  \label{fig:lwpsusc}
+\end{figure}
+
+\appendixfigures  %% needs to be added in front of appendix figures
+
+<<dharma-setup>>=
+@ 
+<<giss-dharma-setup>>=
+@ 
+
+\begin{figure*}
+  \centering
+  <<giss-dharma-timeseries, fig.height=15/2.54>>=
+  @ 
+  \caption{Evolution of domain-mean scalar diagnostics during 24-h simulations
+    from DHARMA LES (solid blue line) and ModelE3 SCM, using Beer's Law
+    parameterization of longwave raditive cooling per \citet{Ackerman2009} (red dotted line)
+    and the ModelE3 native LW radiative transfer (green dashed line).  The panels from the top depict domain-mean
+    inversion height (location of maximum gradient in potential temperature
+    below 5 km altitude), stratiform cloud cover (fraction of columns with
+    opacity of at least 2.5 in the LES), cloud droplet concentration (average weighted by
+    cloud water mixing ratio), liquid water path, and surface
+    precipitation rate.}
+  \label{fig:les-scm-timeseries}
+\end{figure*}
+
+<<dharma-aer-setup>>=
+@
+<<dharma-means-setup>>=
+@
+
+\begin{figure}
+  \centering
+  <<giss-scm-les-nd-lwp, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  @ 
+  \caption{Domain mean \lwp{} versus \nd{} (vertical average weighted by
+    cloud water mixing ratio) for the DHARMA LES (solid blue line) and two
+    ModelE3 SCM configurations: the default tuning (red dotted line) analyzed in
+    this study and the machine-learning tuning Tun1 (dashed green) used in Part
+    1.  The outputs are averaged over hours 2--12, and Beer's Law parameterization
+    of longwave flux divergence is used for the LES and SCM.}
+
+  \label{fig:les-scm-nd-lwp}
+\end{figure}
+
+\clearpage
+
+\part*{Supplemental information}
+
+%% reset counter, change prefix, for SI figures
+\makeatletter
+\setcounter{figure}{0}%
+\def\thefigure{S\@arabic\c@figure}%
+\makeatother
+
+\begin{figure}[b]
+  \centering
+  <<nd-lwp-v2, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  @
+  \caption{\nd--\lwp{} relationship (E3SMv1/v2 comparison).}
+  \label{fig:nd-lwp-v1-v2-si}
+\end{figure}
+
+\begin{figure}
+  \centering
+  <<nd-lwp-v1, fig.width=8.33/2.54, fig.height=8.33/2.54, out.width='8.33cm'>>=
+  @
+  \caption{\nd--\lwp{} relationship (default/noprecsup comparison).}
+  \label{fig:nd-lwp-si}
+\end{figure}
+
+\begin{figure}
+  \centering
+  <<e3sm-scm-ndeps-plot, fig.width=8.33/2.54, fig.height=19.2/2.54, out.width='8.33cm'>>=
+  @
+  \caption{E3SM SCM \nd{} relationships.  As in Fig.~\ref{fig:giss-scm-ndeps}.}
+  \label{fig:e3sm-scm-ndeps-si}
+\end{figure}
+
+
+\end{document}
+
